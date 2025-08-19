@@ -191,6 +191,25 @@ body {
     background-color: var(--custom-blue);
     border-radius: 20px;
     width: 70%;
+    transition: all 0.3s ease;
+}
+
+.shopping-button button:hover {
+    color: white;
+    background-color: var(--custom-blue);
+    border-radius: 20px;
+    width: 70%;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #c26100;
+}
+
+.shopping-button button:focus {
+    color: white;
+    background-color: var(--custom-blue);
+    border-radius: 20px;
+    width: 70%;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #c26100;
 }
 
 .carousel-control-prev,
@@ -285,4 +304,223 @@ body {
 
 .rating-h2 {
     color: var(--custom-orange);
+}
+
+#contact-container {
+    background-image: url("../images/itsamansclass_massimo_dutti-2-1200x762.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.contact-input {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #082540, #252524);
+    color: #ffffff !important;
+    border: 2px solid #c26100;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-input:hover {
+    width: 100%;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #082540, #252524);
+    color: #ffffff !important;
+    border: 2px solid #c26100;
+    transform: scale(1.01);
+    box-shadow: 0 0 6px #c26100;
+}
+
+.contact-input:focus {
+    width: 100%;
+    background: linear-gradient(45deg, #082540, #252524);
+    color: #ffffff !important;
+    border: 2px solid #c26100;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #c26100;
+}
+
+.contact-input::placeholder {
+    color: #9e9e9e;
+    opacity: 1; 
+}
+
+#contact-title {
+    color: var(--custom-orange);
+    font-size: 70px;
+}
+
+#contact-button {
+    background: linear-gradient(#ff8102, #c26100, #ff8102);
+    width: 30%;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+#contact-button:hover {
+    background: linear-gradient(#ff8102, #c26100, #ff8102);
+    width: 32%;
+    border: 1px solid #082540;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #082540;
+}
+
+#contact-button:focus {
+    background: linear-gradient(#ff8102, #c26100, #ff8102);
+    width: 34%;
+    transform: scale(1.05);
+    box-shadow: 0 0 5px #c26100;
+    color: #124460;
+}
+
+#contact-map {
+    border: 5px solid #082540;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #c26100;
+}
+
+.contact-icon {
+    color: #c26100;
+    font-size: 25px;
+}
+
+.contact-span {
+    font-size: 20px;
+}
+
+#footer-brand-paragraph {
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--custom-orange-sup);
+}
+
+#footer-brand-span {
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--custom-dark-blue);
+}
+
+.footer-brand-title {
+    font-size: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--custom-orange);
+}
+
+#footer-products-title {
+    color: var(--custom-orange);
+    font-size: 30px;
+}
+
+.footer-products {
+    transition: all 0.3s ease;
+}
+
+.footer-products:hover {
+    transform: scale(1.05);
+}
+
+.footer-products::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    right: 0;                 /* sağdan başlat */
+    width: 0;                 /* başlangıçta görünmesin */
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.4s ease;
+}
+
+.footer-products:hover::after {
+    transform: scale(1.05);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.footer-products-a {
+    text-decoration: none;
+}
+
+.navbar-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    transition: all 0.3s ease;
+}
+
+.navbar-title:hover {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    transform: scale(1.05);
+}
+
+.navbar-title::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    right: 0;                 /* sağdan başlat */
+    width: 0;                 /* başlangıçta görünmesin */
+    height: 2px;
+    background-color: var(--custom-orange);
+    transition: width 0.4s ease;
+}
+
+.navbar-title:hover::after {
+    transform: scale(1.05);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--custom-orange);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.navbar-text {
+    transition: all 0.3s ease;
+}
+
+.navbar-text:hover {
+    transform: scale(1.05);
+}
+
+.navbar-text::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    right: 0;                 /* sağdan başlat */
+    width: 0;                 /* başlangıçta görünmesin */
+    height: 2px;
+    background-color: var(--custom-orange);
+    transition: width 0.4s ease;
+}
+
+.navbar-text:hover::after {
+    transform: scale(1.05);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--custom-orange);
+    transition: all 0.3s ease;
+    opacity: 0.7;
 }
