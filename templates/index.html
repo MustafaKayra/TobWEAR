@@ -20,7 +20,7 @@
     <div class="container-fluid" id="header-container">
         <nav class="navbar navbar-expand-lg py-3">
             <div class="container justify-content-center">
-                <a class="navbar-brand text-white mx-3 navbar-title" href="#">TobWEAR</a>
+                <a class="navbar-brand text-white mx-3 navbar-title" href="/">TobWEAR</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,10 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item mx-3">
-                            <a class="nav-link text-white navbar-text" href="#">Anasayfa</a>
+                            <a class="nav-link text-white navbar-text" href="/">Anasayfa</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link text-white navbar-text" href="#">Hakkımızda</a>
+                            <a class="nav-link text-white navbar-text" href="{% url 'about' %}">Hakkımızda</a>
                         </li>
                         <li class="nav-item mx-3">
                             <a class="nav-link text-white navbar-text" href="#">Ürünler</a>
@@ -264,7 +264,7 @@
             <h2 class="text-center mt-5 rating-h2">Değerlendirmeler</h2>
             <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis unde, numquam et sed fugiat sequi iusto quo eligendi quisquam minima.</p>
             <div class="row justify-content-center text-center">
-                <div id="carouselExample" class="carousel slide">
+                <div id="carouselExampleCustomer" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row d-flex justify-content-center text-center">
@@ -336,11 +336,11 @@
                             
                         </div>
                     </div>
-                    <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#carouselExampleCustomer" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carouselExampleCustomer" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>

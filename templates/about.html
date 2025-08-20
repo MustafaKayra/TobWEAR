@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TobWEAR</title>
+</head>
+<body>
+
+
+    <div class="container-fluid" id="about-header">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container justify-content-center">
+                <a class="navbar-brand text-white mx-3 navbar-title" href="/">TobWEAR</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="/">Anasayfa</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="{% url 'about' %}">Hakkımızda</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Ürünler</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Sepet</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Giriş</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Kayıt</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Profil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="about-row">
+            <div class="row d-flex justify-content-center">
+                <h1 class="text-center about-title my-5 py-5">Hakkımızda</h1>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container-fluid">
+        <div class="row about-welcome my-5">
+            <div class="col-md-6 py-md-4 d-flex flex-column justify-content-center ps-md-5">
+                <h2 class="text-center about-h2">Hoşgeldiniz</h2>
+                <p class="text-center about-paragraph text-white">TobWEAR, modayı sadece bir giyim tercihi değil, aynı zamanda bir yaşam tarzı olarak görenlerin markasıdır.
+                Kuruluşumuzdan bu yana amacımız, her yaşa ve her tarza hitap eden, modern, rahat ve özgün tasarımlar sunarak modayı herkes için ulaşılabilir hale getirmek oldu.</p>
+            </div>
+            <div class="col-md-6 py-md-4">
+                <div class="about-image-container d-flex align-items-center justify-content-center mb-5" style="position: relative; display: inline-block;">
+                    <img src="{% static 'images/f3527b4c3d7144520be4b51bd755163f.jpg' %}" class="img-fluid about-welcome-image" id="welcome-image1">
+                    <img src="{% static 'images/stylemain.jpg' %}" class="img-fluid about-welcome-image" id="welcome-image2">
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col-md-6 my-4 d-flex justify-content-center">
+                <img src="{% static 'images/Luxury-suits-for-men.jpg' %}" class="img-fluid" id="vision-image">
+            </div>
+            <div class="col-md-6 my-4 d-flex flex-column justify-content-center pe-md-5">
+                <h2 class="text-center about-h2">Vizyonumuz</h2>
+                <p class="text-center text-white">Vizyonumuz, giyim sektöründe yenilikçi çizgimizle fark yaratmak ve müşterilerimizin yalnızca ihtiyaçlarını değil,
+                aynı zamanda tarzlarını da tamamlayan ürünler sunmaktır. TobWEAR olarak, hem günlük kullanımda hem de özel günlerde tercih edilebilecek şık,
+                kaliteli ve uzun ömürlü parçalar üretmeye odaklanıyoruz.</p>
+            </div>
+        </div>
+
+        <div class="container-fluid mb-5" id="quality-container">
+            <div class="row py-5 my-5">
+                <h2 class="text-center about-h2">Kalite Ve Sürdürülebilirlik</h2>
+                <p class="text-center text-white">TobWEAR olarak ürünlerimizde kullanılan kumaşlardan dikiş detaylarına kadar her aşamada kaliteyi önemsiyoruz.
+                Ayrıca doğaya duyduğumuz sorumluluk bilinciyle, sürdürülebilir üretim süreçlerini benimseyerek geleceğe katkı sağlamayı amaçlıyoruz.
+                Çünkü biliyoruz ki moda, sadece bugünün değil yarının da dünyasına hizmet etmelidir.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center py-5">
+            <h2 class="text-center about-h2">Koleksiyonlarımız</h2>
+            <p class="text-center text-white">Koleksiyonlarımızda modern çizgileri, zamansız parçalarla buluşturuyoruz. Rahatlığı ön planda tutarken, şıklığı da asla geri planda bırakmıyoruz.
+            Spor giyimden günlük tarza, iş hayatından özel günlere kadar geniş ürün yelpazemizle her ihtiyaca yanıt veriyoruz.</p>
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-4 mb-5">
+                                <div class="card" id="carousel-card">
+                                    <div class="image-container">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                    </div>
+
+                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                                    </div>
+
+                                    <div class="shopping-button d-flex justify-content-center my-3">
+                                        <button class="btn">Sepete Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-5">
+                                <div class="card" id="carousel-card">
+                                    <div class="image-container">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                    </div>
+
+                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                                    </div>
+
+                                    <div class="shopping-button d-flex justify-content-center my-3">
+                                        <button class="btn">Sepete Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-5">
+                                <div class="card" id="carousel-card">
+                                    <div class="image-container">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                    </div>
+
+                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                                    </div>
+
+                                    <div class="shopping-button d-flex justify-content-center my-3">
+                                        <button class="btn">Sepete Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-item">
+                                <p>selam</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-item">
+                                <p>selam</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        
+            
+                <div class="row d-flex text-center justify-content-center align-items-center my-5">
+                    <h2 class="text-center about-h2 my-5"><span id="whyme-span">Neden</span> TobWEAR?</h2>
+                    <div class="col-md-3 d-flex justify-content-center mb-md-5">
+                        <div class="card whyme-card mb-5">
+                            <div class="header d-flex justify-content-center my-3">
+                                <span><i class="fa-solid fa-house whyme-icon pe-2"></i></span><h3 class="whyme-card-title">Tarzınızı Yansıtır</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-center text-white">Kendinize en uygun kombinleri bulmanızı sağlar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-center mb-md-5">
+                        <div class="card whyme-card mb-5">
+                            <div class="header d-flex justify-content-center my-3">
+                                <span><i class="fa-solid fa-house whyme-icon pe-2"></i></span><h3 class="whyme-card-title">Kaliteye Önem Verir</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-center text-white">Uzun süre keyifle kullanabileceğiniz ürünler üretir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-center mb-md-5">
+                        <div class="card whyme-card mb-5">
+                            <div class="header d-flex justify-content-center my-3">
+                                <span><i class="fa-solid fa-house whyme-icon pe-2"></i></span><h3 class="whyme-card-title">Uygun Fiyat Sunar</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-center text-white">Kaliteli modayı herkesin ulaşabileceği fiyatlarla getirir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-center mb-md-5">
+                        <div class="card whyme-card mb-5">
+                            <div class="header d-flex justify-content-center my-3">
+                                <span><i class="fa-solid fa-house whyme-icon pe-2"></i></span><h3 class="whyme-card-title">Sürdürülebilirliği Destekler</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-center text-white">Çevre dostu üretim politikaları benimser.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        <section id="customers-section">
+            <div class="row d-flex justify-content-center text-center my-5">
+                <h2 class="text-center about-h2">Müşterilerimizle Birlikte Büyüyoruz</h2>
+                <p class="text-center text-white">Bizim için en büyük ilham kaynağı, müşterilerimizin memnuniyetidir. Sizlerden gelen geri bildirimler,
+                TobWEAR’ın geleceğini şekillendiriyor ve her geçen gün daha iyiye ulaşmamızı sağlıyor.</p>
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row d-flex justify-content-center text-center">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card d-flex rating-card py-3">
+                                            <div class="card-header d-flex flex-row">
+                                                <img src="https://placehold.co/40x40" class="img-fluid justify-content-start align-items-start mx-3" id="rating-image">
+                                                <h3 id="rating-title">Mustafa Kayra Toker</h3>
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur nostrum recusandae dolor sed cum nisi sit aut nihil vel exercitationem!</p>
+                                            </div>
+                                            <span class="d-flex justify-content-start align-items-end text-white ps-3 rating-span">18 Ağustos 2025</span>
+                                            <span class="d-flex flex-row justify-content-end align-items-end pe-3 rating-star">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card d-flex rating-card py-3">
+                                            <div class="card-header d-flex flex-row">
+                                                <img src="https://placehold.co/40x40" class="img-fluid justify-content-start align-items-start mx-3" id="rating-image">
+                                                <h3 id="rating-title">Mustafa Kayra Toker</h3>
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur nostrum recusandae dolor sed cum nisi sit aut nihil vel exercitationem!</p>
+                                            </div>
+                                            <span class="d-flex justify-content-start align-items-end text-white ps-3 rating-span">18 Ağustos 2025</span>
+                                            <span class="d-flex flex-row justify-content-end align-items-end pe-3 rating-star">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card d-flex rating-card py-3">
+                                            <div class="card-header d-flex flex-row">
+                                                <img src="https://placehold.co/40x40" class="img-fluid justify-content-start align-items-start mx-3" id="rating-image">
+                                                <h3 id="rating-title">Mustafa Kayra Toker</h3>
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur nostrum recusandae dolor sed cum nisi sit aut nihil vel exercitationem!</p>
+                                            </div>
+                                            <span class="d-flex justify-content-start align-items-end text-white ps-3 rating-span">18 Ağustos 2025</span>
+                                            <span class="d-flex flex-row justify-content-end align-items-end pe-3 rating-star">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <p>Burası</p>
+                            </div>
+                            <div class="carousel-item">
+                                <p>Burası</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+
+    <footer>
+        <div class="container py-5" id="footer-container">
+            <div class="row">
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-center footer-brand-title">TobWEAR</h1>
+                    <p id="footer-brand-paragraph">Gündelik, <span id="footer-brand-span">Klasik</span> Ve Modern</p>
+                </div>
+                
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Ürünler</h2>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Kategoriler</h2>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Menü</h2>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="footer-contact d-flex flex-column flex-md-row justify-content-center align-items-center">
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i class="fa-solid fa-phone contact-icon px-1"></i> +90 123 456 78 90 </span>
+                    </div>
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i class="fa-solid fa-envelope contact-icon px-1"></i> m.toker2009@gmail.com</span>
+                    </div>
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i class="fa-solid fa-city contact-icon px-1"></i> Ankara, Yenimahalle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
