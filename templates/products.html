@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>TobWEAR</title>
+</head>
+
+<body>
+
+
+    <div class="container-fluid pb-5" id="products-header-container">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container justify-content-center">
+                <a class="navbar-brand text-white mx-3 navbar-title" href="/">TobWEAR</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="/">Anasayfa</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="{% url 'about' %}">Hakkımızda</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="{% url 'products' %}">Ürünler</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Sepet</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Giriş</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Kayıt</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="#">Profil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row">
+            <h1 class="text-center products-title">Ürünler</h1>
+            <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo,
+                perspiciatis.</p>
+        </div>
+    </div>
+
+
+    <div class="container my-4">
+        <div class="row text-center my-5">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Kategori Seçin
+                </button>
+                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1" id="dropdownList">
+                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Action</a></li>
+                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Another action</a></li>
+                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row text-center my-5">
+            <div class="form-group row justify-content-center">
+                <div class="col-10 col-md-6 d-md-flex justify-content-center mb-2 mb-md-0 me-auto">
+                    <input type="number" class="form-control d-none" id="inputPrice1" placeholder="En Az Fiyat">
+                </div>
+                <div class="col-10 col-md-6 d-md-flex justify-content-center me-auto">
+                    <input type="number" class="form-control d-none" id="inputPrice2" placeholder="En Çok Fiyat">
+                </div>
+            </div>
+            <div class="price-button d-flex justify-content-center my-5">
+                <button class="btn pricebutton d-none px-5 py-2">Filtrele</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card" id="carousel-card">
+                    <div class="product-image-container">
+                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}"
+                            class="img-fluid" id="carousel-image">
+                    </div>
+
+                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
+                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
+                    </div>
+
+                    <div class="shopping-container d-flex justify-content-center">
+                        <input type="radio" class="btn-check" name="size" id="size-s1" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s1">S</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-m1" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m1">M</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-xl1" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl1">XL</label>
+                    </div>
+
+                    <div class="shopping-button d-flex justify-content-center my-3">
+                        <button class="btn">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card" id="carousel-card">
+                    <div class="product-image-container">
+                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}"
+                            class="img-fluid" id="carousel-image">
+                    </div>
+
+                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
+                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
+                    </div>
+
+                    <div class="shopping-container d-flex justify-content-center">
+                        <input type="radio" class="btn-check" name="size" id="size-s2" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s2">S</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-m2" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m2">M</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-xl2" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl2">XL</label>
+                    </div>
+
+                    <div class="shopping-button d-flex justify-content-center my-3">
+                        <button class="btn">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card" id="carousel-card">
+                    <div class="product-image-container">
+                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}"
+                            class="img-fluid" id="product-image">
+                    </div>
+
+                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
+                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
+                    </div>
+
+                    <div class="shopping-container d-flex justify-content-center">
+                        <input type="radio" class="btn-check" name="size" id="size-s3" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s3">S</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-m3" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m3">M</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-xl3" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl3">XL</label>
+                    </div>
+
+                    <div class="shopping-button d-flex justify-content-center my-3">
+                        <button class="btn">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card" id="carousel-card">
+                    <div class="product-image-container">
+                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}"
+                            class="img-fluid" id="carousel-image">
+                    </div>
+
+                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
+                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
+                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
+                    </div>
+
+                    <div class="shopping-container d-flex justify-content-center">
+                        <input type="radio" class="btn-check" name="size" id="size-s4" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s4">S</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-m4" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m4">M</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-xl4" autocomplete="off">
+                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl4">XL</label>
+                    </div>
+
+                    <div class="shopping-button d-flex justify-content-center my-3">
+                        <button class="btn">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container py-5" id="footer-container">
+            <div class="row">
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-center footer-brand-title">TobWEAR</h1>
+                    <p id="footer-brand-paragraph">Gündelik, <span id="footer-brand-span">Klasik</span> Ve Modern</p>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Ürünler</h2>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Kategoriler</h2>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center pb-2" id="footer-products-title">Menü</h2>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                    <a href="#" class="footer-products-a">
+                        <p class="footer-products text-white">Lorem, ipsum dolor.</p>
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="footer-contact d-flex flex-column flex-md-row justify-content-center align-items-center">
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i
+                                class="fa-solid fa-phone contact-icon px-1"></i> +90 123 456 78 90 </span>
+                    </div>
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i
+                                class="fa-solid fa-envelope contact-icon px-1"></i> m.toker2009@gmail.com</span>
+                    </div>
+                    <div class="col-md-4 pb-3">
+                        <span class="text-white d-flex justify-content-center"><i
+                                class="fa-solid fa-city contact-icon px-1"></i> Ankara, Yenimahalle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
