@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('about/',views.about,name="about"),
-    path('products/',views.products,name="products")
+    path('products/',views.products,name="products"),
+    path('shoppingcard/',views.shoppingcart,name="shoppingcard")
 ]

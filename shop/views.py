@@ -9,3 +9,6 @@ def about(request):
 
 def products(request):
     return render(request,"products.html")
+
+def shoppingcart(request):
+    return render(request,"shoppingcart.html")
