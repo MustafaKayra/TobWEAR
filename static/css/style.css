@@ -1062,3 +1062,52 @@ input::-webkit-inner-spin-button {
         color: var(--custom-orange);
     }
 }
+
+#login-header-container {
+    background-image: url("../images/19-11-12-205-1-min-1024x684.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.login-title {
+    font-size: 100px;
+    color: var(--custom-orange);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ilkanimasyon 1.5s forwards;
+}
+
+.login-paragraph {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ilkanimasyon 1.5s forwards;
+}
+
+#login-form-password {
+    margin-left: 32px !important;
+}
+
+@media (max-width: 768px) {
+    #login-form-password {
+        margin-left: 0px !important;
+    }
+}
+
+.login-form-button {
+    background-color: var(--custom-orange);
+    border-radius: 20px;
+    color: var(--custom-dark-blue);
+    box-shadow: 0 0 10px var(--custom-dark-blue);
+    transition: all 0.3s ease;
+}
+
+.login-form-button:hover {
+    background-color: var(--custom-orange);
+    border-radius: 20px;
+    color: var(--custom-dark-blue);
+    box-shadow: 0 0 10px var(--custom-orange);
+    transform: scale(1.05);
+}
