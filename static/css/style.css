@@ -347,6 +347,37 @@ body {
     box-shadow: 0 0 10px #c26100;
 }
 
+@media(max-width: 768px) {
+    .contact-input {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #082540, #252524);
+        color: #ffffff !important;
+        border: 2px solid #c26100;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+.contact-input:hover {
+        width: 100%;
+        transition: all 0.3s ease;
+        background: linear-gradient(45deg, #082540, #252524);
+        color: #ffffff !important;
+        border: 2px solid #c26100;
+        transform: scale(1.05);
+        box-shadow: 0 0 6px #c26100;
+    }
+
+.contact-input:focus {
+        width: 100%;
+        background: linear-gradient(45deg, #082540, #252524);
+        color: #ffffff !important;
+        border: 2px solid #c26100;
+        transform: scale(1.05);
+        box-shadow: 0 0 10px #c26100;
+    }
+}
+
 .contact-input::placeholder {
     color: #9e9e9e;
     opacity: 1; 
@@ -1110,4 +1141,64 @@ input::-webkit-inner-spin-button {
     color: var(--custom-dark-blue);
     box-shadow: 0 0 10px var(--custom-orange);
     transform: scale(1.05);
+}
+
+.register-title {
+    color: var(--custom-orange);
+    font-size: 100px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ilkanimasyon 1.5s forwards;
+}
+
+#register-header-container {
+    background-image: url("../images/alexander-naglestad-RFhq0SrrgEg-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.register-paragraph {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ilkanimasyon 1.5s forwards;
+}
+
+.register-h2 {
+    color: var(--custom-orange);
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.register-form-button {
+    background-color: var(--custom-orange);
+    border-radius: 20px;
+    color: var(--custom-dark-blue);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--custom-dark-blue);
+}
+
+.register-form-button:hover {
+    background-color: var(--custom-orange);
+    border-radius: 20px;
+    color: var(--custom-dark-blue);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.register-link {
+    text-decoration: none;
+    color: var(--custom-orange);
+}
+
+.register-span {
+    transition: all 0.5s ease;
+}
+
+.register-span:hover {
+    font-size: 17px;
 }
