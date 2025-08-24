@@ -1202,3 +1202,26 @@ input::-webkit-inner-spin-button {
 .register-span:hover {
     font-size: 17px;
 }
+
+#updateuser-header-container {
+    background-image: url("../images/the-wardrobe-spring-clean-for-men-to-achieve-timeless-style.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.updateuser-title {
+    color: var(--custom-orange);
+    font-size: 70px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    opacity: 0;
+    animation: ilkanimasyon 1.5s forwards;
+    transform: translateY(20px);
+}
+
+.updateuser-paragraph {
+    opacity: 0;
+    animation: ilkanimasyon 1.5s forwards;
+    transform: translateY(20px);
+}
