@@ -42,6 +42,9 @@
                             <a class="nav-link text-white navbar-text" href="{% url 'shoppingcard' %}">Sepet</a>
                         </li>
                         <li class="nav-item mx-3">
+                            <a class="nav-link text-white navbar-text" href="{% url 'favorites' %}">Favoriler</a>
+                        </li>
+                        <li class="nav-item mx-3">
                             <a class="nav-link text-white navbar-text" href="{% url 'login' %}">Giriş</a>
                         </li>
                         <li class="nav-item mx-3">
@@ -94,15 +97,15 @@
 
     <div class="container-fluid py-3 d-flex flex-column" id="toprated-container">
         <h2 class="text-center my-3" id="toprated-title">En Çok Tercih Edilen Ürünlerimiz</h2>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center toprated-row">
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-md-4 mb-5">
+                        <div class="row w-100 carousel-row mr-0 ml-0">
+                            <div class="col-md-4 mb-5 mt-5">
                                 <div class="card" id="carousel-card">
                                     <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
@@ -128,10 +131,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mb-5">
+                            <div class="col-md-4 mb-5 mt-5">
                                 <div class="card" id="carousel-card">
                                     <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
@@ -157,10 +160,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mb-5">
+                            <div class="col-md-4 mb-5 mt-5">
                                 <div class="card" id="carousel-card">
                                     <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image">
+                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">

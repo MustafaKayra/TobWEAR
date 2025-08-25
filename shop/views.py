@@ -12,3 +12,6 @@ def products(request):
 
 def shoppingcart(request):
     return render(request,"shoppingcart.html")
+
+def favorites(request):
+    return render(request,"favorites.html")

@@ -158,7 +158,7 @@ body {
 
 #carousel-image {
     width: 100%;
-    height: 150%; /* auto yapılırsa 3 itemde ekranın tamamını kaplar */
+    height: 120%; /* auto yapılırsa 3 itemde ekranın tamamını kaplar */
     object-fit: cover;
     display: block;
     border-radius: 20px;
@@ -168,11 +168,17 @@ body {
     background-color: #252524;
     border-radius: 20px;
     transition: all 0.3s ease;
+    overflow: visible !important;
 }
 
 #carousel-card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 10px #c26100;
+    overflow: visible !important;
+}
+
+.carousel-inner {
+    overflow: visible !important;
 }
 
 #product-detail-title {
@@ -219,10 +225,22 @@ body {
 }
 
 .carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;   /* default genişliği iptal */
+    height: auto;  /* sadece ikon kadar */
+    z-index: 1;
+}
+
+
+.carousel-control-prev,
 .carousel-control-prev-icon {
     display: inline;
     position: absolute;
     left: -60px;
+    z-index: 1;
 }
 
 .carousel-control-next,
@@ -230,6 +248,7 @@ body {
     display: inline;
     position: absolute;
     right: -60px;
+    z-index: 1;
 }
 
 @media (max-width: 768px){
@@ -1221,6 +1240,78 @@ input::-webkit-inner-spin-button {
 }
 
 .updateuser-paragraph {
+    opacity: 0;
+    animation: ilkanimasyon 1.5s forwards;
+    transform: translateY(20px);
+}
+
+.favorite-icon {
+    color: red;
+}
+
+.favorite-button {
+    border-radius: 20px;
+    border: 2px solid red;
+    position: absolute; /* img üzerinde konumlandırmak için */
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.favorite-button:hover {
+    border-radius: 20px;
+    border: 2px solid red;
+    background-color: red;
+    position: absolute; /* img üzerinde konumlandırmak için */
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.favorite-button:hover .favorite-icon {
+    color: #ffffff;
+}
+
+#carousel-card:hover .favorite-button {
+    display: block;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+}
+
+.toprated-row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+#favorites-header-title {
+    background-image: url("../images/wp7400022.webp");
+    background-position: center;
+    background-size: cover;
+}
+
+.favorites-title {
+    font-size: 100px;
+    color: var(--custom-orange);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    opacity: 0;
+    animation: ilkanimasyon 1.5s forwards;
+    transform: translateY(20px);
+}
+
+.favorites-paragraph {
     opacity: 0;
     animation: ilkanimasyon 1.5s forwards;
     transform: translateY(20px);

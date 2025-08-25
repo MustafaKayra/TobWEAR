@@ -12,18 +12,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>TobWEAR</title>
 </head>
-
 <body>
-
-
-    <div class="container-fluid pb-5" id="products-header-container">
+    
+    <div class="container-fluid" id="favorites-header-title">
         <nav class="navbar navbar-expand-lg py-3">
             <div class="container justify-content-center">
                 <a class="navbar-brand text-white mx-3 navbar-title" href="/">TobWEAR</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -57,12 +55,12 @@
             </div>
         </nav>
 
-        <div class="row">
-            <h1 class="text-center products-title">Ürünler</h1>
-            <p class="text-center text-white products-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo,
-                perspiciatis.</p>
+        <div class="row py-5">
+            <h1 class="text-center favorites-title">Favori Ürünler</h1>
+            <p class="text-center text-white favorites-paragraph">Favori Ürünlerinizin Listesi</p>
         </div>
     </div>
+
 
 
     <div class="container my-4">
@@ -211,6 +209,7 @@
     </div>
 
 
+
     <footer>
         <div class="container py-5" id="footer-container">
             <div class="row">
@@ -295,8 +294,6 @@
         </div>
     </footer>
 
-
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
