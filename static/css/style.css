@@ -1039,41 +1039,55 @@ input::-webkit-inner-spin-button {
 }
 
 .plus-button {
-    border-radius: 40px;
+    border-radius: 50%;
     border: 2px solid var(--custom-dark-blue);
     background-color: var(--custom-dark-blue);
     transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 10px var(--custom-orange);
 }
 
 .plus-button:hover {
-    border-radius: 30px;
+    border-radius: 50%;
     border: 2px solid var(--custom-orange);
     transform: scale(1.10);
+    width: 60px;
+    height: 60px;
 }
 
 .plus-button:focus {
-    border-radius: 20px;
+    border-radius: 50%;
     border: 2px solid var(--custom-orange);
-    transform: scale(1.15);
+    transform: scale(1.20);
+    width: 60px;
+    height: 60px;
 }
 
 .minus-button {
-    border-radius: 40px;
+    border-radius: 50%;
     border: 2px solid var(--custom-dark-blue);
     background-color: var(--custom-dark-blue);
     transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 10px var(--custom-orange);
 }
 
 .minus-button:hover {
-    border-radius: 30px;
+    border-radius: 50%;
     border: 2px solid var(--custom-orange);
     transform: scale(1.10);
+    width: 60px;
+    height: 60px;
 }
 
 .minus-button:focus {
-    border-radius: 20px;
+    border-radius: 50%;
     border: 2px solid var(--custom-orange);
-    transform: scale(1.15);
+    transform: scale(1.20);
+    width: 60px;
+    height: 60px;
 }
 
 .product-info-trash {
@@ -1276,6 +1290,14 @@ input::-webkit-inner-spin-button {
     color: #ffffff;
 }
 
+.favorite-detailbutton {
+    border-radius: 20px;
+    border: 2px solid red;
+    z-index: 10;
+    display: inline;
+    transition: all 0.3s ease;
+}
+
 #carousel-card:hover .favorite-button {
     display: block;
     transition: all 0.3s ease;
@@ -1315,4 +1337,282 @@ input::-webkit-inner-spin-button {
     opacity: 0;
     animation: ilkanimasyon 1.5s forwards;
     transform: translateY(20px);
+}
+
+.productdetail-title {
+    color: var(--custom-orange);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 70px;
+}
+
+.productdetail-colorbutton {
+    background: linear-gradient(45deg, #90ee90, #008000);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--custom-dark-blue);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #2b94d1;
+}
+
+.productdetail-colorbutton:hover {
+    background: linear-gradient(45deg, #90ee90, #008000);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--custom-orange);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.productdetail-colorbutton:focus { /* :checked */
+    background: linear-gradient(45deg, #90ee90, #008000);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--custom-orange);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.productdetail-h2 {
+    color: #2b94d1;
+    font-size: 30px;
+    white-space: nowrap;
+}
+
+.productdetail-sizebutton {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--custom-dark-blue);
+    background: linear-gradient(45deg, #c26100, #082540);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.productdetail-sizebutton:hover {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--custom-orange);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.productdetail-sizebutton:hover { /* :checked */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--custom-orange);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.productdetail-addbasket {
+    background: linear-gradient(45deg, #c26100, #ff9102);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #2b94d1;
+    color: var(--custom-dark-blue);
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.productdetail-addbasket:hover {
+    background: linear-gradient(45deg, #c26100, #ff9102);
+    border-radius: 20px;
+    border: 1px solid var(--custom-orange);
+    box-shadow: 0 0 10px var(--custom-orange);
+    color: var(--custom-dark-blue);
+    font-size: 20px;
+    transform: scale(1.05);
+}
+
+.productdetail-fastbutton {
+    background: linear-gradient(45deg, #082540, #124460);
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--custom-orange);
+    color: var(--custom-orange);
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.productdetail-fastbutton:hover {
+    background: linear-gradient(45deg, #082540, #124460);
+    border-radius: 20px;
+    border: 1px solid var(--custom-blue);
+    box-shadow: 0 0 10px #2b94d1;
+    color: var(--custom-orange);
+    font-size: 20px;
+    transform: scale(1.05);
+}
+
+.productdetail-addfavoritebutton {
+    background: linear-gradient(45deg, #800404, #ac0505);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #fff;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.productdetail-addfavoritebutton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ac0505;
+    color: #fff;
+}
+
+.productdetail-deletefavoritebutton {
+    background: linear-gradient(45deg, #ac0505, #fc1808);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #fff;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.productdetail-deletefavoritebutton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #fc1808;
+    color: #fff;
+}
+
+.default-image {
+    display: none;
+}
+
+.default-image.active {
+    display: block;
+    justify-content: center;
+    position: relative;
+}
+
+.main-image {
+    width: 800px;
+    height: 500px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid var(--custom-orange);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.thumb-image {
+    width: 800px;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid var(--custom-blue);
+    box-shadow: 0 0 10px var(--custom-blue);
+    transition: all 0.3s ease;
+}
+
+.thumb-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+    border: 2px solid var(--custom-orange);
+}
+
+.popupdefault-image {
+    display: none;
+}
+
+.popupdefault-image.active {
+    display: block;
+    justify-content: center;
+}
+
+.popupmain-image {
+    width: 800px;
+    height: 500px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid var(--custom-orange);
+    box-shadow: 0 0 10px var(--custom-orange);
+}
+
+.popupthumb-image {
+    width: 800px;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid var(--custom-blue);
+    box-shadow: 0 0 10px var(--custom-blue);
+    transition: all 0.3s ease;
+}
+
+.popupthumb-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--custom-orange);
+    border: 2px solid var(--custom-orange);
+}
+
+.productdetail-description {
+    background-color: #131312;
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--custom-blue);
+}
+
+.productdetail-headerinfotitle {
+    color: #2b94d1;
+    font-size: 25px;
+    white-space: nowrap;
+}
+
+.productdetail-headerinfo {
+    background-color: #131312;
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--custom-blue);
+}
+
+.productdetail-infocard {
+    background: linear-gradient(45deg, #2b0903, #082540);
+    box-shadow: 0 0 10px #2b94d1;
+    width: 40%;
+    border-radius: 20px;
+}
+
+.productdetail-infocardtitle {
+    color: #2b94d1;
+    font-size: 20px;
+}
+
+.productdetail-imageinfo {
+    background: linear-gradient(45deg, #3d0d04, #082540);
+    position: absolute;
+    top: 10px;    /* yukarıdan boşluk */
+    right: 10px;  /* sağdan boşluk */
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.productdetail-imageinfotext {
+  color: #fff;
+  font-size: 20px;
+  margin: 0;
+}
+
+.anotherproducts-nextbutton,
+.anotherproducts-prevbutton {
+    border-radius: 50%;
+    border: 1px solid var(--custom-orange);
+    box-shadow: 0 0 10px var(--custom-orange);
+    transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+}
+
+.anotherproducts-nextbutton:hover,
+.anotherproducts-prevbutton:hover {
+    border-radius: 50%;
+    border: 1px solid #2b94d1;
+    box-shadow: 0 0 10px #2b94d1;
+    transform: scale(1.05);
 }
