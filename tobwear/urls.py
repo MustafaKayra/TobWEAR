@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from shop import views
 from users import views as users_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,4 +16,4 @@ urlpatterns = [
     path('updateuser/',users_views.updateuser,name="updateuser"),
     path('favorites/',views.favorites,name="favorites"),
     path('productdetail/',views.productdetail,name="productdetail")
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
