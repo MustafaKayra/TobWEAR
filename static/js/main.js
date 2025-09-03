@@ -15,6 +15,11 @@ const anotherProductsNextButton = document.querySelectorAll(".anotherproducts-ne
 const anotherProductsPrevButton = document.querySelectorAll(".anotherproducts-prevbutton")
 const carouselWrappers = document.querySelectorAll(".carousel-wrapper")
 
+const dropdownListItems = document.querySelectorAll(".dropdownlistitem")
+const maximumPrice = document.querySelector(".maxprice")
+const minimumPrice = document.querySelector(".minprice")
+const filterButton = document.querySelector(".pricebutton")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -112,4 +117,78 @@ if (anotherProductsPrevButton && anotherProductsNextButton) {
             console.log("Previous")
         })
     })
+}
+
+
+let category = null
+
+if (dropdownListItems) {
+    dropdownListItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            category = item.textContent.trim()
+            
+            fetch("/products/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({ 
+                    category: category }),
+            })
+            .then(response => response.text())
+            .then(html => { 
+                document.querySelector("#products-container").innerHTML = html;
+            });
+        })
+    })
+
+    if (minPriceInput && maxPriceInput && priceButton) {
+        priceButton.addEventListener("click", (e) => {
+            e.preventDefault()
+            console.log("Buton Çalıştı")
+
+            const minimumPriceValue = minPriceInput.value
+            const maximumPriceValue = maxPriceInput.value
+
+            console.log(minimumPriceValue)
+            console.log(maximumPriceValue)
+            console.log("Kategori: " + category)
+
+            fetch("/products/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    category: category,
+                    minimumPriceValue: minimumPriceValue,
+                    maximumPriceValue: maximumPriceValue
+                })
+            })
+            .then(response => response.text())
+            .then(html => { 
+                document.querySelector("#products-container").innerHTML = html;
+            });
+        })
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0,name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+            }
+        }
+        }
+        return cookieValue;
+   }
+   var csrftoken = getCookie('csrftoken')
 }

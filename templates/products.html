@@ -73,140 +73,31 @@
                     Kategori Seçin
                 </button>
                 <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1" id="dropdownList">
-                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Action</a></li>
-                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Another action</a></li>
-                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">Something else here</a></li>
+                {% for category in categories %}
+                    <li><a class="dropdown-item text-white dropdownlistitem" href="#">{{ category.name }}</a></li>
+                {% endfor %}
                 </ul>
             </div>
         </div>
 
         <div class="row text-center my-5">
-            <div class="form-group row justify-content-center">
-                <div class="col-10 col-md-6 d-md-flex justify-content-center mb-2 mb-md-0 me-auto">
-                    <input type="number" class="form-control d-none" id="inputPrice1" placeholder="En Az Fiyat">
+            <form>
+                <div class="form-group row justify-content-center">
+                    <div class="col-10 col-md-6 d-md-flex justify-content-center mb-2 mb-md-0 me-auto">
+                        <input type="number" name="minprice" class="form-control d-none minprice" id="inputPrice1" placeholder="En Az Fiyat">
+                    </div>
+                    <div class="col-10 col-md-6 d-md-flex justify-content-center me-auto">
+                        <input type="number" name="maxprice" class="form-control d-none maxprice" id="inputPrice2" placeholder="En Çok Fiyat">
+                    </div>
                 </div>
-                <div class="col-10 col-md-6 d-md-flex justify-content-center me-auto">
-                    <input type="number" class="form-control d-none" id="inputPrice2" placeholder="En Çok Fiyat">
+                <div class="price-button d-flex justify-content-center my-5">
+                    <button type="button" class="btn pricebutton d-none px-5 py-2" name="filterpricebutton">Filtrele</button>
                 </div>
-            </div>
-            <div class="price-button d-flex justify-content-center my-5">
-                <button class="btn pricebutton d-none px-5 py-2">Filtrele</button>
-            </div>
+            </form>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <div class="card" id="carousel-card">
-                    <div class="product-image-container">
-                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                    </div>
-
-                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                    </div>
-
-                    <div class="shopping-container d-flex justify-content-center">
-                        <input type="radio" class="btn-check" name="size" id="size-s1" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s1">S</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-m1" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m1">M</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-xl1" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl1">XL</label>
-                    </div>
-
-                    <div class="shopping-button d-flex justify-content-center my-3">
-                        <button class="btn">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="carousel-card">
-                    <div class="product-image-container">
-                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                    </div>
-
-                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                    </div>
-
-                    <div class="shopping-container d-flex justify-content-center">
-                        <input type="radio" class="btn-check" name="size" id="size-s2" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s2">S</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-m2" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m2">M</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-xl2" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl2">XL</label>
-                    </div>
-
-                    <div class="shopping-button d-flex justify-content-center my-3">
-                        <button class="btn">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="carousel-card">
-                    <div class="product-image-container">
-                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="product-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                    </div>
-
-                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                    </div>
-
-                    <div class="shopping-container d-flex justify-content-center">
-                        <input type="radio" class="btn-check" name="size" id="size-s3" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s3">S</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-m3" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m3">M</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-xl3" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl3">XL</label>
-                    </div>
-
-                    <div class="shopping-button d-flex justify-content-center my-3">
-                        <button class="btn">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="carousel-card">
-                    <div class="product-image-container">
-                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                    </div>
-
-                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                    </div>
-
-                    <div class="shopping-container d-flex justify-content-center">
-                        <input type="radio" class="btn-check" name="size" id="size-s4" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-s4">S</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-m4" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-m4">M</label>
-
-                        <input type="radio" class="btn-check" name="size" id="size-xl4" autocomplete="off">
-                        <label class="btn btn-outline-primary mx-1 mb-2" for="size-xl4">XL</label>
-                    </div>
-
-                    <div class="shopping-button d-flex justify-content-center my-3">
-                        <button class="btn">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
+        <div id="products-container">
+            {% include "partials/product_list.html" %}
         </div>
     </div>
 

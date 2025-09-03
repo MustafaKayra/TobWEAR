@@ -42,6 +42,13 @@ class ProductImage(models.Model):
     images = models.ImageField(upload_to='images/')
 
 
+class ProductCategory(models.Model):
+    name = models.CharField(max_length=100,null=False,blank=False,verbose_name="Kategori İsmi")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Product(models.Model):
     name = models.CharField(max_length=100,null=False,blank=False,verbose_name="Ürün İsmi")
     price = models.IntegerField(null=False,blank=False,verbose_name="Fiyat")
@@ -51,6 +58,7 @@ class Product(models.Model):
     sizes = models.ManyToManyField(ProductSize,null=False,blank=False,verbose_name="Ürün Bedenleri")
     images = models.ManyToManyField(ProductImage,null=False,blank=False,verbose_name="Resimler")
     description = models.TextField(null=True,blank=True)
+    category = models.ForeignKey(ProductCategory,null=False,blank=False,verbose_name="Kategori",on_delete=models.CASCADE)
     slug = models.SlugField(null=False,blank=True,unique=True,db_index=True,verbose_name="URL")
 
     def save(self, *args, **kwargs):
