@@ -19,6 +19,8 @@ class ProductColor(models.Model):
     ]
 
     color = models.CharField(max_length=100,choices=COLOR_CHOICES)
+    code = models.CharField(max_length=7,null=False,blank=False)
+    code2 = models.CharField(max_length=7,null=False,blank=False)
 
     def __str__(self):
         return self.get_color_display()
