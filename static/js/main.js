@@ -20,6 +20,10 @@ const maximumPrice = document.querySelector(".maxprice")
 const minimumPrice = document.querySelector(".minprice")
 const filterButton = document.querySelector(".pricebutton")
 
+const plusButton = document.querySelector(".plus-button")
+const minusButton = document.querySelector(".minus-button")
+const productQuantity = document.querySelector("#product-quantity")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -191,4 +195,36 @@ if (dropdownListItems) {
         return cookieValue;
    }
    var csrftoken = getCookie('csrftoken')
+}
+
+
+if (minusButton && plusButton && productQuantity) {
+
+    plusButton.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        let quantity = parseInt(productQuantity.textContent)
+        if (quantity <= 19) {
+            quantity++
+            productQuantity.textContent = quantity
+        } else {
+            console.log("20'den fazla ürün satın alınamaz")
+        }
+        
+        
+        console.log("Ürün Sayısı Arttırıldı")
+    })
+
+    minusButton.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        let quantity = parseInt(productQuantity.textContent)
+        if (quantity <= 1) {
+            console.log("Birden az değer girilemez")
+        } else {
+            quantity--
+            productQuantity.textContent = quantity
+        }
+        
+    })
 }

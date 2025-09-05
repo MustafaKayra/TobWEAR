@@ -52,5 +52,18 @@ def shoppingcart(request):
 def favorites(request):
     return render(request,"favorites.html")
 
-def productdetail(request):
-    return render(request,"productdetail.html")
+def productdetail(request,slug):
+    product = Product.objects.get(slug=slug)
+    productfeatures = product.features.all()[:3]
+    anotherproducts1 = Product.objects.filter().order_by("discounted")[:4]
+    anotherproducts2 = Product.objects.filter(category__name=product.category.name)[:4]
+    anotherproducts3 = Product.objects.filter().order_by("price")[:4]
+    
+    context = {
+        "product": product,
+        "productfeatures": productfeatures,
+        "anotherproducts1": anotherproducts1,
+        "anotherproducts2": anotherproducts2,
+        "anotherproducts3": anotherproducts3
+    }
+    return render(request,"productdetail.html",context)
