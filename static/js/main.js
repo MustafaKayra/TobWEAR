@@ -24,6 +24,8 @@ const plusButton = document.querySelector(".plus-button")
 const minusButton = document.querySelector(".minus-button")
 const productQuantity = document.querySelector("#product-quantity")
 
+const cardExpireInput = document.querySelector("#cardexpireinput")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -226,5 +228,24 @@ if (minusButton && plusButton && productQuantity) {
             productQuantity.textContent = quantity
         }
         
+    })
+}
+
+
+if (cardExpireInput) {
+    cardExpireInput.addEventListener("input", (e) => {
+        let value = e.target.value.trim()
+        
+        if (!isNaN(value) && value.length === 4) {
+            value = value.slice(0, 2) + "/" + value.slice(2)
+            e.target.value = value
+        }
+    })
+
+    cardExpireInput.addEventListener("keydown", (e) => {
+        if(e.key === "Delete" || e.key === "Backspace") {
+            let newvalue = ""
+            e.target.value = newvalue
+        }
     })
 }

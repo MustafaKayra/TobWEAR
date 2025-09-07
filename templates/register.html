@@ -63,67 +63,69 @@
 
 
     <div class="container">
-        <div class="row d-flex justify-content-center my-5 mx-auto">
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="İsim">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Soyisim">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="email" class="form-control contact-input" placeholder="Email">
-            </div>
-
-            <div class="d-flex justify-content-center mx-auto">
-                <div class="form-group mb-4 w-100 mx-2 mx-md-5">
-                    <input type="password" class="form-control contact-input" placeholder="Şifre">
+        <form method="post">
+            <div class="row d-flex justify-content-center my-5 mx-auto">
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="İsim" name="first_name">
                 </div>
-                <div class="form-group mb-4 w-100 mx-2 mx-md-5">
-                    <input type="password" class="form-control contact-input" placeholder="Şifreyi Onayla">
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="Soyisim" name="last_name">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="email" class="form-control contact-input" placeholder="Email" name="email">
+                </div>
+
+                <div class="d-flex justify-content-center mx-auto">
+                    <div class="form-group mb-4 w-100 mx-2 mx-md-5">
+                        <input type="password" class="form-control contact-input" placeholder="Şifre" name="password1">
+                    </div>
+                    <div class="form-group mb-4 w-100 mx-2 mx-md-5">
+                        <input type="password" class="form-control contact-input" placeholder="Şifreyi Onayla" name="password2">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <h2 class="text-center register-h2">Kart Ve Adres Bilgileri</h2>
-        <p class="text-center text-white">Ürün Satın Almak İçin Gereklidir!</p>
+            <h2 class="text-center register-h2">Kart Ve Adres Bilgileri</h2>
+            <p class="text-center text-white">Ürün Satın Almak İçin Gereklidir!</p>
 
-        <div class="row d-flex justify-content-center my-5">
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Adres">
+            <div class="row d-flex justify-content-center my-5">
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="Adres" name="adress">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="Şehir" name="city">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="Ülke" name="country">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Posta Kodu" name="zipcode">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Telefon Numarası" name="gsmnumber">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Kart Numarası" name="cardnumber">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" id="cardexpireinput" placeholder="Kart Son Kullanma Tarihi(AA/YY)" name="cardexpire" maxlength="5">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="CVC" name="cvc">
+                </div>
+
+                <button class="btn register-form-button w-50 mb-5">Kayıt Ol</button>
             </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Şehir">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Ülke">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Posta Kodu">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Telefon Numarası">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Kart Numarası">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Kart Son Kullanma Tarihi">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="CVC">
-            </div>
-
-            <button class="btn register-form-button w-50 mb-5">Kayıt Ol</button>
-        </div>
+        </form>
     </div>
 
 
@@ -180,6 +182,7 @@
     </footer>
 
 
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
