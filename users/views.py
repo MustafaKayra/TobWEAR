@@ -3,15 +3,15 @@ from .models import CustomUser
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import login,authenticate,logout
 
-def login(request):
+def loginuser(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("email")
-            password = form.cleaned_data.get("password1")
+            password = form.cleaned_data.get("password")
             user = authenticate(email=email,password=password)
             if user:
-                login(user)
+                login(request, user)
                 print("Kullanıcı Başarıyla Giriş Yaptı")
                 return redirect('index')
             else:
@@ -28,7 +28,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(user)
+            login(request, user)
             print("Kullanıcı Kayıt Oldu")
             return redirect('index')
         else:
@@ -39,4 +39,15 @@ def register(request):
 
 
 def updateuser(request):
-    return render(request,"updateuser.html")
+    if request.method == "POST":
+        form = RegisterForm(request.POST, instance=request.user)
+        if form.is_valid():
+            newuser = form.save()
+            login(request, newuser)
+            print("Kullanıcı Bilgileri Düzenlendi")
+            return redirect('index')
+        else:
+            print(form.errors)
+    else:
+        form = RegisterForm()
+    return render(request,"updateuser.html",{"form":form})

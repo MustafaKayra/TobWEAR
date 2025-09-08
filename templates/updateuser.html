@@ -64,67 +64,82 @@
 
 
     <div class="container">
-        <div class="row d-flex justify-content-center my-5 mx-auto">
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="İsim">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Soyisim">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="email" class="form-control contact-input" placeholder="Email">
-            </div>
-
-            <div class="d-flex justify-content-center mx-auto">
-                <div class="form-group mb-4 w-100 mx-2 mx-md-5">
-                    <input type="password" class="form-control contact-input" placeholder="Şifre">
+        <form method="post">
+        {% csrf_token %}
+            <div class="row d-flex justify-content-center my-5 mx-auto">
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="İsim" value="{{ request.user.first_name }}" name="first_name" autocomplete="off">
                 </div>
-                <div class="form-group mb-4 w-100 mx-2 mx-md-5">
-                    <input type="password" class="form-control contact-input" placeholder="Şifreyi Onayla">
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" placeholder="Soyisim" value="{{ request.user.last_name }}" name="last_name" autocomplete="off">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="email" class="form-control contact-input" placeholder="Email" value="{{ request.user.email }}" name="email" autocomplete="off">
+                </div>
+
+                <div class="d-flex justify-content-center mx-auto">
+                    <div class="form-group mb-4 w-100 mx-2 mx-md-5">
+                        <input type="password" class="form-control contact-input" placeholder="Şifre" name="password1" autocomplete="off">
+                    </div>
+                    <div class="form-group mb-4 w-100 mx-2 mx-md-5">
+                        <input type="password" class="form-control contact-input" placeholder="Şifreyi Onayla" name="password2" autocomplete="off">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <h2 class="text-center register-h2">Kart Ve Adres Bilgileri</h2>
-        <p class="text-center text-white">Ürün Satın Almak İçin Gereklidir!</p>
+            <h2 class="text-center register-h2">Kart Ve Adres Bilgileri</h2>
+            <p class="text-center text-white">Ürün Satın Almak İçin Gereklidir!</p>
 
-        <div class="row d-flex justify-content-center my-5">
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Adres">
+            <div class="row d-flex justify-content-center my-5">
+                <div class="form-group mb-4 w-100">
+                    {% if request.user.adress %}
+                        <input type="text" class="form-control contact-input" placeholder="Adres" value="{{ request.user.adress }}" name="adress" autocomplete="off">
+                    {% else %}
+                        <input type="text" class="form-control contact-input" placeholder="Adres" name="adress" autocomplete="off">
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    {% if request.user.city %}
+                        <input type="text" class="form-control contact-input" placeholder="Şehir" value="{{ request.user.city }}" name="city" autocomplete="off">
+                    {% else %}
+                        <input type="text" class="form-control contact-input" placeholder="Şehir" name="city" autocomplete="off">
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    {% if request.user.country %}
+                        <input type="text" class="form-control contact-input" placeholder="Ülke" value="{{ request.user.country }}" name="country" autocomplete="off">
+                    {% else %}
+                        <input type="text" class="form-control contact-input" placeholder="Ülke" name="country" autocomplete="off">
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Posta Kodu" value="{{ request.user.zipcode }}" name="zipcode" autocomplete="off">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Telefon Numarası" value="{{ request.user.gsmnumber }}" name="gsmnumber" autocomplete="off">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="Kart Numarası" value="{{ request.user.cardnumber }}" name="cardnumber" autocomplete="off">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="text" class="form-control contact-input" id="cardexpireinput" placeholder="Kart Son Kullanma Tarihi(AA/YY)" value="{{ request.user.cardexpire }}" maxlength="5" name="cardexpire" autocomplete="off">
+                </div>
+
+                <div class="form-group mb-4 w-100">
+                    <input type="number" class="form-control contact-input" placeholder="CVC" value="request.user.cvc" name="cvc" autocomplete="off">
+                </div>
+
+                <button class="btn register-form-button w-50 mb-5">Değişiklikleri Kaydet</button>
             </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Şehir">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="text" class="form-control contact-input" placeholder="Ülke">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Posta Kodu">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Telefon Numarası">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Kart Numarası">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="Kart Son Kullanma Tarihi">
-            </div>
-
-            <div class="form-group mb-4 w-100">
-                <input type="number" class="form-control contact-input" placeholder="CVC">
-            </div>
-
-            <button class="btn register-form-button w-50 mb-5">Değişiklikleri Kaydet</button>
-        </div>
+        </form>
     </div>
 
 
