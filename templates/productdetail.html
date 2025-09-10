@@ -120,38 +120,38 @@
 
                 <div class="row d-flex justify-content-center px-md-5 my-4 productdetail-headerinfo">
                 {% for feature in productfeatures %}
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4 mt-3 px-md-3">
                         <h3 class="text-center productdetail-headerinfotitle">{{ feature.name }}</h3>
                         <p class="text-center text-white">{{ feature.feature }}</p>
                     </div>
                 {% endfor %}
                 </div>
-                <div class="row d-flex flex-row justify-content-center align-items-center mb-5 mt-3">
-                    <div class="col-md-6">
-                        <h2 class="text-center productdetail-h2">Ürün Rengi</h2>
-                        <div class="d-flex flex-row justify-content-center">
-                        {% for color in product.colors.all %}
-                            <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off">
-                            <label class="btn btn-outline-primary productdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
-                        {% endfor %}
+                    <div class="row d-flex flex-row justify-content-center align-items-center mb-5 mt-3">
+                        <div class="col-md-6">
+                            <h2 class="text-center productdetail-h2">Ürün Rengi</h2>
+                            <div class="d-flex flex-row justify-content-center">
+                            {% for color in product.colors.all %}
+                                <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
+                                <label class="btn btn-outline-primary productdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
+                            {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="text-center productdetail-h2">Ürün Bedeni</h2>
+                            <div class="d-flex flex-row justify-content-center">
+                            {% for size in product.sizes.all %}
+                                <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
+                                <label class="btn btn-outline-primary productdetail-sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
+                            {% endfor %}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <h2 class="text-center productdetail-h2">Ürün Bedeni</h2>
-                        <div class="d-flex flex-row justify-content-center">
-                        {% for size in product.sizes.all %}
-                            <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off">
-                            <label class="btn btn-outline-primary productdetail-sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
-                        {% endfor %}
-                        </div>
+                    <h2 class="text-center productdetail-h2">Ürün Miktarı</h2>
+                    <div class="d-flex flex-row justify-content-center mb-5">
+                        <button class="plus-button mx-4"><i class="fa-solid fa-plus" style="color: #c26100;"></i></button>
+                        <p class="product-info-paragraph fs-3 mt-2" id="product-quantity" style="color: #2b94d1;">1</p>
+                        <button class="minus-button mx-4"><i class="fa-solid fa-minus" style="color: #c26100;"></i></button>
                     </div>
-                </div>
-                <h2 class="text-center productdetail-h2">Ürün Miktarı</h2>
-                <div class="d-flex flex-row justify-content-center mb-5">
-                    <button class="plus-button mx-4"><i class="fa-solid fa-plus" style="color: #c26100;"></i></button>
-                    <p class="product-info-paragraph fs-3 mt-2" id="product-quantity" style="color: #2b94d1;">1</p>
-                    <button class="minus-button mx-4"><i class="fa-solid fa-minus" style="color: #c26100;"></i></button>
-                </div>
                 <button class="btn productdetail-addbasket my-4 w-50">Sepete Ekle</button>
                 <button class="btn productdetail-fastbutton w-50">Hemen Satın Al</button>
                 <button class="btn productdetail-addfavoritebutton my-4 w-50">Favorilere Ekle</button>
@@ -195,7 +195,7 @@
 
                         <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
                             <h3 class="text-center px-3" id="product-detail-title">{{ anotherproduct.name }}</h3>
-                            <p class="text-center text-white px-3 fs-4">3{{ anotherproduct.discounted }} TL</p>
+                            <p class="text-center text-white px-3 fs-4">{{ anotherproduct.discounted }} TL</p>
                             <span class="fs-6 text-center" id="product-detail-span">{{ anotherproduct.price }} TL</span>
                         </div>
 
@@ -246,7 +246,7 @@
 
                         <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
                             <h3 class="text-center px-3" id="product-detail-title">{{ anotherproduct.name }}</h3>
-                            <p class="text-center text-white px-3 fs-4">3{{ anotherproduct.discounted }} TL</p>
+                            <p class="text-center text-white px-3 fs-4">{{ anotherproduct.discounted }} TL</p>
                             <span class="fs-6 text-center" id="product-detail-span">{{ anotherproduct.price }} TL</span>
                         </div>
 
@@ -297,7 +297,7 @@
 
                         <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
                             <h3 class="text-center px-3" id="product-detail-title">{{ anotherproduct.name }}</h3>
-                            <p class="text-center text-white px-3 fs-4">3{{ anotherproduct.discounted }} TL</p>
+                            <p class="text-center text-white px-3 fs-4">{{ anotherproduct.discounted }} TL</p>
                             <span class="fs-6 text-center" id="product-detail-span">{{ anotherproduct.price }} TL</span>
                         </div>
 
@@ -383,6 +383,9 @@
         </div>
     </footer>
 
+    <script>
+        const productSlug = "{{ product.slug }}"
+    </script>
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>

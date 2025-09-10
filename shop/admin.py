@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductColor, ProductFeatures, ProductImage, ProductSize, ProductCategory
+from .models import Product, ProductColor, ProductFeatures, ProductImage, ProductSize, ProductCategory, OrderItem, ShoppingCard
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -10,3 +10,5 @@ admin.site.register(ProductFeatures)
 admin.site.register(ProductImage)
 admin.site.register(ProductSize)
 admin.site.register(ProductCategory)
+admin.site.register(OrderItem)
+admin.site.register(ShoppingCard)

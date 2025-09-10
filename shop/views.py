@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Product, ProductCategory
+from django.shortcuts import render, redirect
+from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSize, ShoppingCard, OrderCard
 import json
 
 def index(request):
@@ -47,7 +47,30 @@ def products(request):
     return render(request,"products.html", context)
 
 def shoppingcart(request):
-    return render(request,"shoppingcart.html")
+    if ShoppingCard.objects.filter(customer=request.user):
+        shoppingcard = ShoppingCard.objects.get(customer=request.user)
+        context = {
+            "shoppingcard": shoppingcard
+        }
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        if "orderQuantity" in data:
+            orderquantity = data.get("orderQuantity")
+            orderid = data.get("orderId")
+            order = OrderItem.objects.get(id=orderid)
+            order.amount = orderquantity
+            order.save()
+            print("Order: ", order)
+            print("Order Amount: ", order.amount)      
+
+        if "orderDelete" in data:
+            orderid = data.get("orderId")
+            order = OrderItem.objects.get(id=orderid)
+            order.delete()
+
+    return render(request,"shoppingcart.html",context)
 
 def favorites(request):
     return render(request,"favorites.html")
@@ -58,6 +81,27 @@ def productdetail(request,slug):
     anotherproducts1 = Product.objects.filter().order_by("discounted")[:4]
     anotherproducts2 = Product.objects.filter(category__name=product.category.name)[:4]
     anotherproducts3 = Product.objects.filter().order_by("price")[:4]
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+        amount = data.get("number")
+        colorname = data.get("color")
+        sizename = data.get("size")
+
+        color = ProductColor.objects.get(color=colorname)
+        size = ProductSize.objects.get(size=sizename)
+        neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
+
+        if ShoppingCard.objects.filter(customer=request.user).exists():
+            card = ShoppingCard.objects.get(customer=request.user)
+            card.orders.add(neworder)
+            print("Alışveriş Sepetine Ürün Eklendi")
+        else:
+            newcard = ShoppingCard.objects.create(customer=request.user)
+            newcard.orders.add(neworder)
+            print("Alışveriş Sepeti Oluşturuldu")
+            
+
     
     context = {
         "product": product,

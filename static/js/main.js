@@ -26,6 +26,17 @@ const productQuantity = document.querySelector("#product-quantity")
 
 const cardExpireInput = document.querySelector("#cardexpireinput")
 
+const addBasketButton = document.querySelector(".productdetail-addbasket")
+const selectedColor = document.querySelector('.btn-check[name="color"]:checked');
+const selectedSize = document.querySelector('input[name="size"]:checked');
+
+const orderPlusButtonAll = document.querySelectorAll(".orderplus-button")
+const orderMinusButtonAll = document.querySelectorAll(".orderminus-button")
+const orderQuantityAll = document.querySelectorAll("#orderproduct-quantity")
+const amountSaveButton = document.querySelectorAll(".product-info-save")
+const orderDeleteButton = document.querySelectorAll(".product-info-trash")
+const basketOrderDeleteButton = document.querySelectorAll(".basket-info-delete")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -89,7 +100,7 @@ if (anotherProductsPrevButton && anotherProductsNextButton) {
     anotherProductsNextButton.forEach((nextButton) => {
         nextButton.addEventListener("click", () => {
             const activeWrapper = document.querySelector(".carousel-wrapper:not(.d-none)");
-        
+
             if (activeWrapper.id === "carousel-wrapper1") {
                 activeWrapper.classList.add("d-none");
                 document.querySelector("#carousel-wrapper2").classList.remove("d-none");
@@ -100,22 +111,22 @@ if (anotherProductsPrevButton && anotherProductsNextButton) {
                 activeWrapper.classList.add("d-none");
                 document.querySelector("#carousel-wrapper1").classList.remove("d-none");
             }
-            
+
             console.log("Selam");
         })
     })
 
     anotherProductsPrevButton.forEach((prevButton) => {
-            prevButton.addEventListener("click", () => {
+        prevButton.addEventListener("click", () => {
             const activeWrapper = document.querySelector(".carousel-wrapper:not(.d-none)");
 
-            if(activeWrapper.id === "carousel-wrapper1"){
+            if (activeWrapper.id === "carousel-wrapper1") {
                 activeWrapper.classList.add("d-none")
                 document.querySelector("#carousel-wrapper3").classList.remove("d-none")
-            } else if(activeWrapper.id === "carousel-wrapper3") {
+            } else if (activeWrapper.id === "carousel-wrapper3") {
                 activeWrapper.classList.add("d-none")
                 document.querySelector("#carousel-wrapper2").classList.remove("d-none")
-            } else if(activeWrapper.id === "carousel-wrapper2"){
+            } else if (activeWrapper.id === "carousel-wrapper2") {
                 activeWrapper.classList.add("d-none")
                 document.querySelector("#carousel-wrapper1").classList.remove("d-none")
             }
@@ -133,20 +144,21 @@ if (dropdownListItems) {
         item.addEventListener("click", (e) => {
             e.preventDefault();
             category = item.textContent.trim()
-            
+
             fetch("/products/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrftoken,
                 },
-                body: JSON.stringify({ 
-                    category: category }),
+                body: JSON.stringify({
+                    category: category
+                }),
             })
-            .then(response => response.text())
-            .then(html => { 
-                document.querySelector("#products-container").innerHTML = html;
-            });
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector("#products-container").innerHTML = html;
+                });
         })
     })
 
@@ -174,29 +186,29 @@ if (dropdownListItems) {
                     maximumPriceValue: maximumPriceValue
                 })
             })
-            .then(response => response.text())
-            .then(html => { 
-                document.querySelector("#products-container").innerHTML = html;
-            });
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector("#products-container").innerHTML = html;
+                });
         })
     }
 
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie != '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0,name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
-        }
         return cookieValue;
-   }
-   var csrftoken = getCookie('csrftoken')
+    }
+    var csrftoken = getCookie('csrftoken')
 }
 
 
@@ -212,8 +224,8 @@ if (minusButton && plusButton && productQuantity) {
         } else {
             console.log("20'den fazla ürün satın alınamaz")
         }
-        
-        
+
+
         console.log("Ürün Sayısı Arttırıldı")
     })
 
@@ -227,7 +239,7 @@ if (minusButton && plusButton && productQuantity) {
             quantity--
             productQuantity.textContent = quantity
         }
-        
+
     })
 }
 
@@ -235,7 +247,7 @@ if (minusButton && plusButton && productQuantity) {
 if (cardExpireInput) {
     cardExpireInput.addEventListener("input", (e) => {
         let value = e.target.value.trim()
-        
+
         if (!isNaN(value) && value.length === 4) {
             value = value.slice(0, 2) + "/" + value.slice(2)
             e.target.value = value
@@ -243,9 +255,156 @@ if (cardExpireInput) {
     })
 
     cardExpireInput.addEventListener("keydown", (e) => {
-        if(e.key === "Delete" || e.key === "Backspace") {
+        if (e.key === "Delete" || e.key === "Backspace") {
             let newvalue = ""
             e.target.value = newvalue
         }
+    })
+}
+
+
+if (addBasketButton) {
+    addBasketButton.addEventListener("click", () => {
+        let quantity = productQuantity.textContent
+        let number = parseInt(quantity)
+
+        const selectedColor = document.querySelector('input[name="color"]:checked');
+        const color = selectedColor.value
+
+        const selectedSize = document.querySelector('input[name="size"]:checked')
+        const size = selectedSize.value
+        
+
+        fetch(`/productdetail/${productSlug}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+                number: number,
+                color: color,
+                size: size
+            })
+        })
+    })
+}
+
+
+let orderQuantity = null
+console.log(orderQuantity)
+if (orderPlusButtonAll && orderMinusButtonAll && orderQuantityAll && orderDeleteButton && basketOrderDeleteButton) {
+    orderPlusButtonAll.forEach((btn, index) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            orderQuantity = parseInt(orderQuantityAll[index].textContent)
+            if (orderQuantity <= 19) {
+                orderQuantity++
+                orderQuantityAll[index].textContent = orderQuantity
+                console.log("Ürün Adeti Arttırıldı")
+                console.log(orderQuantity)
+            } else {
+                console.log("Ürün Adeti 20'den Fazla Olamaz")
+            }
+
+            amountSaveButton[index].className = "product-info-save px-5"
+        })
+    })
+
+    orderMinusButtonAll.forEach((btn, index) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            orderQuantity = orderQuantityAll[index].textContent
+            if (orderQuantity <= 1) {
+                console.log("Ürün Adeti 1'den Az Olamaz")
+            } else {
+                orderQuantity--
+                orderQuantityAll[index].textContent = orderQuantity
+                console.log("Ürün Adeti Azaltıldı")
+                console.log(orderQuantity)
+            }
+
+            amountSaveButton[index].className = "product-info-save px-5"
+        })
+    })
+
+    amountSaveButton.forEach((btn, index) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            const quantity = parseInt(orderQuantityAll[index].textContent);
+            const orderCard = btn.closest(".product-info-card")
+            const orderId = orderCard.getAttribute("data-order-id")
+            console.log(quantity)
+
+            fetch("/shoppingcard/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    orderQuantity: quantity,
+                    orderId: orderId
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
+    })
+
+    orderDeleteButton.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            let orderId = btn.getAttribute("value")
+            console.log(orderId)
+
+            fetch("/shoppingcard/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    orderId: orderId,
+                    orderDelete: true
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
+    })
+
+    basketOrderDeleteButton.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            let orderId = btn.getAttribute("value")
+            console.log(orderId)
+
+            fetch("/shoppingcard/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    orderId: orderId,
+                    orderDelete: true
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
     })
 }
