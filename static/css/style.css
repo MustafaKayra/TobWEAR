@@ -1725,3 +1725,11 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
     background: none;
     border: none;
 }
+
+.carddetail-addbasket {
+    
+}
+
+.carddetail-addbasket:hover {
+    
+}

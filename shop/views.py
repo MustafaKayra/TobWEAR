@@ -3,7 +3,17 @@ from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSi
 import json
 
 def index(request):
-    return render(request,"index.html")
+    mostratedproducts1 = Product.objects.filter().order_by("name")[:3]
+    mostratedproducts2 = Product.objects.filter().order_by("discounted")[:3]
+    mostratedproducts3 = Product.objects.filter().order_by("price")[:3]
+
+    context = {
+        "mostratedproducts1": mostratedproducts1,
+        "mostratedproducts2": mostratedproducts2,
+        "mostratedproducts3": mostratedproducts3
+    }
+
+    return render(request,"index.html",context)
 
 def about(request):
     return render(request,"about.html")
@@ -17,24 +27,47 @@ def products(request):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             data = {}
-        category_name = data.get("category")
-        minprice = data.get("minimumPriceValue")
-        maxprice = data.get("maximumPriceValue")
-        print("Fiyat Filtre Değerleri: ",minprice, maxprice)
+
+        if "category" in data or "minimumPriceValue" in data or "maximumPriceValue" in data:
+            category_name = data.get("category")
+            minprice = data.get("minimumPriceValue")
+            maxprice = data.get("maximumPriceValue")
+            print("Fiyat Filtre Değerleri: ",minprice, maxprice)
+            
+
+            if category_name:
+                productobjects = productobjects.filter(category__name=category_name)
+                print(productobjects)
+                print("Kategori Filtresi Çalıştı")
+
+            if minprice:
+                print("Minprice kontrolü")
+                productobjects = productobjects.filter(price__gte=minprice, category__name=category_name)
+
+            if maxprice:
+                print("Maxprice kontrolü")
+                productobjects = productobjects.filter(price__lte=maxprice, category__name=category_name)
         
+        elif "productId" in data:
+            data = json.loads(request.body)
+            productId = data.get("productId")
+            colorname = data.get("color")
+            sizename = data.get("size")
 
-        if category_name:
-            productobjects = productobjects.filter(category__name=category_name)
-            print(productobjects)
-            print("Kategori Filtresi Çalıştı")
-
-        if minprice:
-            print("Minprice kontrolü")
-            productobjects = productobjects.filter(price__gte=minprice, category__name=category_name)
-
-        if maxprice:
-            print("Maxprice kontrolü")
-            productobjects = productobjects.filter(price__lte=maxprice, category__name=category_name)
+            color = ProductColor.objects.get(color=colorname)
+            size = ProductSize.objects.get(size=sizename)
+            product = Product.objects.get(id=productId)
+            neworder = OrderItem.objects.create(product=product, color=color, size=size, amount=1)
+            print("Yeni Sipariş:", neworder)
+            
+            if ShoppingCard.objects.get(customer=request.user):
+                card = ShoppingCard.objects.get(customer=request.user)
+                card.orders.add(neworder)
+                print("Ürün Eklendi")
+            else:
+                newcard = ShoppingCard.objects.create(customer=request.user)
+                newcard.orders.add(neworder)
+                print("Ürün Yeni Sepete Eklendi")
 
         return render(request, "partials/product_list.html", {
             "productobjects": productobjects

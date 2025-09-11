@@ -37,6 +37,8 @@ const amountSaveButton = document.querySelectorAll(".product-info-save")
 const orderDeleteButton = document.querySelectorAll(".product-info-trash")
 const basketOrderDeleteButton = document.querySelectorAll(".basket-info-delete")
 
+const cardAddBasketButton = document.querySelectorAll(".carddetail-addbasket")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -398,6 +400,39 @@ if (orderPlusButtonAll && orderMinusButtonAll && orderQuantityAll && orderDelete
                 body: JSON.stringify({
                     orderId: orderId,
                     orderDelete: true
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
+    })
+}
+
+
+if (cardAddBasketButton) {
+    cardAddBasketButton.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            let productId = btn.getAttribute("value")
+
+            const selectedColor = document.querySelector('input[name="color"]:checked');
+            const color = selectedColor.value
+
+            const selectedSize = document.querySelector('input[name="size"]:checked')
+            const size = selectedSize.value
+
+            fetch("/products/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    productId: productId,
+                    color: color,
+                    size: size
                 })
             })
             .then(response => {

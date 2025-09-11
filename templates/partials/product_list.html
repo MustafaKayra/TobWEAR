@@ -17,20 +17,20 @@
 
             <div class="shopping-container d-flex justify-content-center my-3">
                 {% for size in product.sizes.all %}
-                <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size }}">
+                <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
                 <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
                 {% endfor %}
             </div>
 
             <div class="shopping-container d-flex justify-content-center">
                 {% for color in product.colors.all %}
-                <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
+                <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
                 <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
                 {% endfor %}
             </div>
 
             <div class="shopping-button d-flex justify-content-center my-3">
-                <button class="btn">Sepete Ekle</button>
+                <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
             </div>
         </div>
     </div>

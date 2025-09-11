@@ -102,139 +102,113 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row w-100 carousel-row mr-0 ml-0">
+                            {% for product in mostratedproducts1 %}
                             <div class="col-md-4 mb-5 mt-5">
                                 <div class="card" id="carousel-card">
                                     <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
+                                        <h3 class="text-center px-3" id="product-detail-title">{{ product.name }}</h3>
+                                        <p class="text-center text-white px-3 fs-4">{{ product.discounted }} TL</p>
+                                        <span class="fs-6 text-center" id="product-detail-span">{{ product.price }} TL</span>
                                     </div>
 
                                     <div class="shopping-container d-flex justify-content-center my-3">
-                                        <input type="radio" class="btn-check" name="size" id="size-s1" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-s1">S</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-m1" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-m1">M</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-xl1" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-xl1">XL</label>
+                                    {% for size in product.sizes.all %}
+                                        <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
+                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
+                                    {% endfor %}
                                     </div>
 
                                     <div class="shopping-container d-flex justify-content-center">
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
+                                    {% for color in product.colors.all %}
+                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
+                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
+                                    {% endfor %}
                                     </div>
 
                                     <div class="shopping-button d-flex justify-content-center my-3">
-                                        <button class="btn">Sepete Ekle</button>
+                                        <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4 mb-5 mt-5">
-                                <div class="card" id="carousel-card">
-                                    <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                                    </div>
-
-                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                                    </div>
-
-                                    <div class="shopping-container d-flex justify-content-center my-3">
-                                        <input type="radio" class="btn-check" name="size" id="size-s2" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-s2">S</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-m2" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-m2">M</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-xl2" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-xl2">XL</label>
-                                    </div>
-
-                                    <div class="shopping-container d-flex justify-content-center">
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    </div>
-
-                                    <div class="shopping-button d-flex justify-content-center my-3">
-                                        <button class="btn">Sepete Ekle</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 mb-5 mt-5">
-                                <div class="card" id="carousel-card">
-                                    <div class="image-container">
-                                        <img src="{% static 'images/Aklasu_Journal_-_Last_Minute_Adjustments-1.jpg' %}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
-                                    </div>
-
-                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
-                                        <h3 class="text-center px-3" id="product-detail-title">Siyah Deri Ceket</h3>
-                                        <p class="text-center text-white px-3 fs-4">3500.00TL</p>
-                                        <span class="fs-6 text-center" id="product-detail-span">4500.00TL</span>
-                                    </div>
-
-                                    <div class="shopping-container d-flex justify-content-center my-3">
-                                        <input type="radio" class="btn-check" name="size" id="size-s3" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-s3">S</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-m3" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-m3">M</label>
-
-                                        <input type="radio" class="btn-check" name="size" id="size-xl3" autocomplete="off">
-                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-xl3">XL</label>
-                                    </div>
-
-                                    <div class="shopping-container d-flex justify-content-center">
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    
-                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color }}">
-                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, #90ee90, #008000);"></label>
-                                    </div>
-
-                                    <div class="shopping-button d-flex justify-content-center my-3">
-                                        <button class="btn">Sepete Ekle</button>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-item">
-                                <p>selam</p>
+                        <div class="row w-100 carousel-row mr-0 ml-0">
+                            {% for product in mostratedproducts2 %}
+                            <div class="col-md-4 mb-5 mt-5">
+                                <div class="card" id="carousel-card">
+                                    <div class="image-container">
+                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                    </div>
+
+                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                                        <h3 class="text-center px-3" id="product-detail-title">{{ product.name }}</h3>
+                                        <p class="text-center text-white px-3 fs-4">{{ product.discounted }} TL</p>
+                                        <span class="fs-6 text-center" id="product-detail-span">{{ product.price }} TL</span>
+                                    </div>
+
+                                    <div class="shopping-container d-flex justify-content-center my-3">
+                                    {% for size in product.sizes.all %}
+                                        <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
+                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
+                                    {% endfor %}
+                                    </div>
+
+                                    <div class="shopping-container d-flex justify-content-center">
+                                    {% for color in product.colors.all %}
+                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
+                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
+                                    {% endfor %}
+                                    </div>
+
+                                    <div class="shopping-button d-flex justify-content-center my-3">
+                                        <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
+                                    </div>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-item">
-                                <p>selam</p>
+                        <div class="row w-100 carousel-row mr-0 ml-0">
+                            {% for product in mostratedproducts3 %}
+                            <div class="col-md-4 mb-5 mt-5">
+                                <div class="card" id="carousel-card">
+                                    <div class="image-container">
+                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                    </div>
+
+                                    <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                                        <h3 class="text-center px-3" id="product-detail-title">{{ product.name }}</h3>
+                                        <p class="text-center text-white px-3 fs-4">{{ product.discounted }} TL</p>
+                                        <span class="fs-6 text-center" id="product-detail-span">{{ product.price }} TL</span>
+                                    </div>
+
+                                    <div class="shopping-container d-flex justify-content-center my-3">
+                                    {% for size in product.sizes.all %}
+                                        <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
+                                        <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
+                                    {% endfor %}
+                                    </div>
+
+                                    <div class="shopping-container d-flex justify-content-center">
+                                    {% for color in product.colors.all %}
+                                        <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
+                                        <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
+                                    {% endfor %}
+                                    </div>
+
+                                    <div class="shopping-button d-flex justify-content-center my-3">
+                                        <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
+                                    </div>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -473,7 +447,7 @@
     </footer>
 
 
-
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
