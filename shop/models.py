@@ -80,7 +80,10 @@ class OrderItem(models.Model):
     date = models.DateTimeField(auto_now_add=True,null=False,blank=False,verbose_name="Ürün Eklenme Tarihi")
 
     def totalprice(self):
-        total = self.product.price * self.amount
+        if self.product.discounted:
+            total = self.product.discounted * self.amount
+        else:
+            total = self.product.price * self.amount
         return total
 
     def __str__(self):

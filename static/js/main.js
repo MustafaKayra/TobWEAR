@@ -39,6 +39,8 @@ const basketOrderDeleteButton = document.querySelectorAll(".basket-info-delete")
 
 const cardAddBasketButton = document.querySelectorAll(".carddetail-addbasket")
 
+const basketOrderTitle = document.querySelectorAll(".product-info-h2")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -441,5 +443,17 @@ if (cardAddBasketButton) {
                 }
             })
         })
+    })
+}
+
+
+if (basketOrderTitle) {
+    basketOrderTitle.forEach((title) => {
+        let length = title.textContent.length
+        if (length > 10) {
+            title.style.fontSize = "25px"
+        } else if (length > 20) {
+            title.style.fontSize = "22px"
+        }
     })
 }

@@ -65,9 +65,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.cardnumber and len(self.cardnumber) != 16:
             raise ValidationError("Geçerli Bir Kart Numarası Giriniz")
         
-        if self.cardexpire and not self.cardexpire.isdigit():
-            raise ValidationError("Kart Son Kullanma Tarihi Sadece Rakamlardan Oluşmalıdır")
-        
         if self.cvc and not self.cvc.isdigit():
             raise ValidationError("Kart Güvenlik Kodu Sadece Rakamlardan Oluşmalıdır")
         

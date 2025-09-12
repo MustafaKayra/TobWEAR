@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSize, ShoppingCard, OrderCard
 import json
+from django.core.exceptions import ValidationError
+import iyzipay
+
 
 def index(request):
     mostratedproducts1 = Product.objects.filter().order_by("name")[:3]
@@ -17,6 +20,7 @@ def index(request):
 
 def about(request):
     return render(request,"about.html")
+
 
 def products(request):
     productobjects = Product.objects.all()
@@ -79,6 +83,7 @@ def products(request):
     }
     return render(request,"products.html", context)
 
+
 def shoppingcart(request):
     if ShoppingCard.objects.filter(customer=request.user):
         shoppingcard = ShoppingCard.objects.get(customer=request.user)
@@ -105,8 +110,10 @@ def shoppingcart(request):
 
     return render(request,"shoppingcart.html",context)
 
+
 def favorites(request):
     return render(request,"favorites.html")
+
 
 def productdetail(request,slug):
     product = Product.objects.get(slug=slug)
@@ -123,7 +130,11 @@ def productdetail(request,slug):
 
         color = ProductColor.objects.get(color=colorname)
         size = ProductSize.objects.get(size=sizename)
-        neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
+
+        if OrderItem.objects.filter(product=product):
+            raise ValidationError("Bu Üründen Sepette Var!")
+        else:
+            neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
 
         if ShoppingCard.objects.filter(customer=request.user).exists():
             card = ShoppingCard.objects.get(customer=request.user)
@@ -134,8 +145,6 @@ def productdetail(request,slug):
             newcard.orders.add(neworder)
             print("Alışveriş Sepeti Oluşturuldu")
             
-
-    
     context = {
         "product": product,
         "productfeatures": productfeatures,
@@ -144,3 +153,101 @@ def productdetail(request,slug):
         "anotherproducts3": anotherproducts3
     }
     return render(request,"productdetail.html",context)
+
+
+def payment(request):
+    customer = request.user
+    card = ShoppingCard.objects.get(customer=request.user)
+
+    if request.method == "POST":
+        options = {
+            'api_key': 'sandbox-LC3nNJCVAqA1QZYlFSreYK5VO3nYIDlE',
+            'secret_key': 'sandbox-kOflXwc5MbTldBKuogFADjFlrQlKsMfS',
+            'base_url': 'sandbox-api.iyzipay.com',
+        }
+
+        payment_card = {
+            'cardHolderName': customer.first_name +" "+ customer.last_name, #Kart Sahibinin Adı
+            'cardNumber': customer.cardnumber, #Kart Numarası
+            'expireMonth': customer.cardexpire.split("/")[0].strip(), #Kartın Son Kullanma Ayı
+            'expireYear': customer.cardexpire.split("/")[1].strip(), #Kartın Son Kullanma Yılı
+            'cvc': customer.cvc, #Kartın Güvenlik Numarası
+            'registeredCart': '1' #Kartı Kaydedip Kaydetmeme Durumu '0' Kaydetmez '1' Kaydeder
+        }
+
+        buyer = {
+            'id': str(customer.id), #Alıcının ID'si
+            'name': customer.first_name, #Alıcının Adı
+            'surname': customer.last_name, #Alıcının Soyadı
+            'gsmNumber': customer.gsmnumber, #Alıcının Telefon Numarası
+            'email': customer.email, #Alıcının Emaili
+            'identityNumber': '74300864791', #Alıcının Kimlik Numarası
+            'lastLoginDate': '2015-10-05 12:43:35', #Alıcının Son Giriş Yaptığı Tarih
+            'registrationDate': '2013-04-21 15:12:09', #Alıcının Kayıt Olduğu Tarih
+            'registrationAddress': customer.adress, #Alıcının Kayıtlı Olduğu Adresi
+            'ip': request.META.get('REMOTE_ADDR'), #Alıcının IP Adresi
+            'city': customer.city, #Alıcının Yaşadığı Şehir
+            'country': customer.country, #Alıcının Yaşadığı Ülke
+            'zipCode': customer.zipcode, #Alıcının Posta Kodu
+        }
+
+        address = {
+            'contactName': customer.first_name +" "+ customer.last_name, #Adresle İlgili Kişinin Adı
+            'city': customer.city, #Şehir
+            'country': customer.country, #Ülke
+            'address': customer.adress, #Adres Detayları
+            'zipCode': customer.zipcode #Posta Kodu
+        }
+
+        basket_items = [
+            
+        ]
+
+        totalprice = 0
+
+        for items in card.orders.all():
+            item_total_price = items.totalprice()
+
+            basket_item = {
+                "id": str(items.product.id),
+                "name": items.product.name,
+                "category1": str(items.product.category.name),
+                "category2": str(items.product.name),
+                "itemType": 'PHYSICAL',
+                "price": str(item_total_price),
+                "quantity": str(items.amount) 
+            }
+
+            totalprice += item_total_price
+            basket_items.append(basket_item)
+
+
+        payment_request = {
+            'locale': 'tr', #Dil ve yerel ayar
+            'conversationId': '123456789', #İsteğin Konuşma Id'si
+            'price': str(totalprice), #Toplam Tutar(Vergiler Hariç)
+            'paidPrice': str(totalprice), #Ödenen Toplam Tutar(Vergiler Dahil)
+            'currency': 'TRY', #Para Birimi
+            'installment': '1', #Taksit Sayısı
+            'basketId': str(card.id), #Sepet ID'si
+            'paymentChannel': 'WEB', #Ödeme Kanalı
+            'paymentGroup': 'PRODUCT', #Ödeme Grubu('PRODUCT' ürün ödemesi için)
+            'paymentCard': payment_card, #Ödeme Kartı Bilgileri
+            'buyer': buyer, #Alıcı Bilgileri,
+            'shippingAddress': address, #Teslimat Adresi
+            'billingAddress': address, #Fatura Adresi
+            'basketItems': basket_items #Sepet Öğeleri
+        }
+
+        payment = iyzipay.Payment().create(payment_request, options)
+        payment_result = json.loads(payment.read().decode('utf-8'))
+        if payment_result.get("status") == "success":
+            print("Ödeme Başarıyla Gerçekleşti, Siparişiniz Hazırlanıyor")
+            card.ordered = True
+            card.save()
+            OrderCard.objects.create(shoppingcard=card)
+            return redirect('index')
+        elif payment_result.get("status") == "failure":
+            print("Ödemeniz Başarısız Oldu, Kart Ve Adres Bilgilerinizi Kontrol Ediniz")
+            print(payment_result)
+            return redirect('updateuser')

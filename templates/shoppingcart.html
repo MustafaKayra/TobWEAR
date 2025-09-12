@@ -106,7 +106,10 @@
                     </div>
                 </div>
                 <div class="payment-button d-flex justify-content-center my-5">
-                    <button class="btn" id="product-payment-button">Ödemeyi Tamamla</button>
+                    <form action="{% url 'payment' %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn" id="product-payment-button" name="payment">Ödemeyi Tamamla</button>
+                    </form>
                 </div>
             </div>
 

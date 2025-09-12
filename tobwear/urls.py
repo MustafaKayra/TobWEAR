@@ -15,5 +15,6 @@ urlpatterns = [
     path('register/',users_views.register,name="register"),
     path('updateuser/',users_views.updateuser,name="updateuser"),
     path('favorites/',views.favorites,name="favorites"),
-    path('productdetail/<slug:slug>',views.productdetail,name="productdetail")
+    path('productdetail/<slug:slug>',views.productdetail,name="productdetail"),
+    path('payment/',views.payment,name="payment")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
