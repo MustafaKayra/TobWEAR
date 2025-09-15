@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSize, ShoppingCard, OrderCard
+from users.models import CustomUser
 import json
 from django.core.exceptions import ValidationError
 import iyzipay
@@ -90,6 +91,11 @@ def shoppingcart(request):
         context = {
             "shoppingcard": shoppingcard
         }
+    
+    else:
+        context = {
+            "shoppingcard": None
+        }
 
     if request.method == "POST":
         data = json.loads(request.body)
@@ -121,29 +127,55 @@ def productdetail(request,slug):
     anotherproducts1 = Product.objects.filter().order_by("discounted")[:4]
     anotherproducts2 = Product.objects.filter(category__name=product.category.name)[:4]
     anotherproducts3 = Product.objects.filter().order_by("price")[:4]
+    customer = request.user
 
     if request.method == "POST":
-        data = json.loads(request.body)
-        amount = data.get("number")
-        colorname = data.get("color")
-        sizename = data.get("size")
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            data = {}
+        if "number" in data or "color" in data or "size" in data:
+            amount = data.get("number")
+            colorname = data.get("color")
+            sizename = data.get("size")
 
-        color = ProductColor.objects.get(color=colorname)
-        size = ProductSize.objects.get(size=sizename)
+            color = ProductColor.objects.get(color=colorname)
+            size = ProductSize.objects.get(size=sizename)
 
-        if OrderItem.objects.filter(product=product):
-            raise ValidationError("Bu Üründen Sepette Var!")
-        else:
-            neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
-
-        if ShoppingCard.objects.filter(customer=request.user).exists():
             card = ShoppingCard.objects.get(customer=request.user)
-            card.orders.add(neworder)
-            print("Alışveriş Sepetine Ürün Eklendi")
-        else:
-            newcard = ShoppingCard.objects.create(customer=request.user)
-            newcard.orders.add(neworder)
-            print("Alışveriş Sepeti Oluşturuldu")
+            if card.orders.filter(product=product).exists():
+                raise ValidationError("Bu üründen zaten sepette var!")
+            else:
+                neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
+
+            if ShoppingCard.objects.filter(customer=request.user).exists():
+                card = ShoppingCard.objects.get(customer=request.user)
+                card.orders.add(neworder)
+                print("Alışveriş Sepetine Ürün Eklendi")
+            else:
+                newcard = ShoppingCard.objects.create(customer=request.user)
+                newcard.orders.add(neworder)
+                print("Alışveriş Sepeti Oluşturuldu")
+
+        elif "favoriteButton" in request.POST:
+            customer.favorites.add(product)
+            print("Favorilere Eklendi")
+        
+        elif "deleteFavoriteButton" in request.POST:
+            customer.favorites.remove(product)
+            print("Favorilerden Kaldırıldı")
+
+        elif "favoriteProductName" in data:
+            productname = data.get("favoriteProductName")
+            print("Ürün İsmi: ",productname)
+            targetproduct = Product.objects.get(name=productname)
+            customer.favorites.add(targetproduct)
+
+        elif "deleteFavoriteProductName" in data:
+            productname = data.get("deleteFavoriteProductName")
+            print("Ürün İsmi: ",productname)
+            targetproduct = Product.objects.get(name=productname)
+            customer.favorites.remove(targetproduct)
             
     context = {
         "product": product,

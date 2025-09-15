@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.core.exceptions import ValidationError
+from shop.models import Product
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -36,6 +37,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     cardnumber = models.CharField(max_length=16,null=True,blank=True,verbose_name="Kart Numarası")
     cardexpire = models.CharField(max_length=5,null=True,blank=True,verbose_name="Kart Son Kullanma Tarihi")
     cvc = models.CharField(max_length=3,null=True,blank=True,verbose_name="CVC")
+    favorites = models.ManyToManyField(Product,verbose_name="Favori Ürünler")
     is_active = models.BooleanField(default=True,verbose_name="Kullanıcı Aktiflik Durumu")
     is_staff = models.BooleanField(default=False,verbose_name="Kullanıcı Yönetici Paneline Giriş Yetkisi")
     is_superuser = models.BooleanField(default=False,verbose_name="Yönetici Yetkisi")

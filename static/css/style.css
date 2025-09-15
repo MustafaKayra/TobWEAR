@@ -1321,33 +1321,6 @@ input::-webkit-inner-spin-button {
     color: red;
 }
 
-.favorite-button {
-    border-radius: 20px;
-    border: 2px solid red;
-    position: absolute; /* img üzerinde konumlandırmak için */
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    display: none;
-    transition: all 0.3s ease;
-}
-
-.favorite-button:hover {
-    border-radius: 20px;
-    border: 2px solid red;
-    background-color: red;
-    position: absolute; /* img üzerinde konumlandırmak için */
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    display: none;
-    transition: all 0.3s ease;
-}
-
-.favorite-button:hover .favorite-icon {
-    color: #ffffff;
-}
-
 .favorite-detailbutton {
     border-radius: 20px;
     border: 2px solid red;
@@ -1563,6 +1536,21 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
 }
 
 .productdetail-deletefavoritebutton {
+    background: linear-gradient(45deg, #c90505, #7a0303);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ac0505 !important;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.productdetail-deletefavoritebutton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #7a0303;
+    color: #fff;
+}
+
+.productdetail-deletefavoritebutton {
     background: linear-gradient(45deg, #ac0505, #fc1808);
     border-radius: 20px;
     box-shadow: 0 0 10px #fff;
@@ -1732,4 +1720,65 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
 
 .carddetail-addbasket:hover {
     
+}
+
+.shoppingcard-h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    color: #082540;
+}
+
+.shoppingcard-paragraph {
+    color: #ffffff;
+    padding-bottom: 20px;
+}
+
+.shoppingcard-link {
+    text-decoration: none;
+    display: inline;
+    transition: all 0.3s ease;
+}
+
+.shoppingcard-link:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+    display: inline;
+}
+
+.favoriteform {
+    display: flex;
+    justify-content: center;
+}
+
+.addfavorite-button button {
+    background: linear-gradient(45deg, #800404, #ac0505);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #fff;
+    color: #fff !important;
+    transition: all 0.3s ease;
+    width: 70%;
+}
+
+.addfavorite-button button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ac0505;
+    color: #fff !important;
+    width: 70%;
+}
+
+.deletefavorite-button button {
+    background: linear-gradient(45deg, #c90505, #7a0303);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ac0505 !important;
+    color: #fff;
+    transition: all 0.3s ease;
+    width: 70%;
+}
+
+.deletefavorite-button button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #7a0303;
+    color: #fff;
+    width: 70%;
 }

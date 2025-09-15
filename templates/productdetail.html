@@ -154,7 +154,17 @@
                     </div>
                 <button class="btn productdetail-addbasket my-4 w-50">Sepete Ekle</button>
                 <button class="btn productdetail-fastbutton w-50">Hemen Satın Al</button>
-                <button class="btn productdetail-addfavoritebutton my-4 w-50">Favorilere Ekle</button>
+                {% if product in request.user.favorites.all %}
+                <form method="post" class="favoriteform w-100">
+                {% csrf_token %}
+                    <button class="btn productdetail-deletefavoritebutton my-4 w-50" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                </form>
+                {% else %}
+                <form method="post" class="favoriteform w-100">
+                {% csrf_token %}
+                    <button class="btn productdetail-addfavoritebutton my-4 w-50" name="favoriteButton">Favorilere Ekle</button>
+                </form>
+                {% endif %}
             </div>
         </div>
 
@@ -186,10 +196,10 @@
                 </div>
                 {% for anotherproduct in anotherproducts1 %}
                 <div class="col-md-2">
-                    <div class="card" id="carousel-card">
+                    <div class="card" id="carousel-card" data-product-name="{{ product.slug }}">
                         <div class="image-container">
                             <a href="{% url 'productdetail' anotherproduct.slug %}">
-                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image">
                             </a>
                         </div>
 
@@ -216,6 +226,15 @@
                         <div class="shopping-button d-flex justify-content-center my-3">
                             <button class="btn carddetail-addbasket" value="{{ anotherproduct.id }}">Sepete Ekle</button>
                         </div>
+                        {% if anotherproduct in request.user.favorites.all %}
+                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                        </div>
+                        {% else %}
+                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -237,10 +256,10 @@
                 </div>
                 {% for anotherproduct in anotherproducts2 %}
                 <div class="col-md-2">
-                    <div class="card" id="carousel-card">
+                    <div class="card" id="carousel-card" data-product-name="{{ product.slug }}">
                         <div class="image-container">
                             <a href="{% url 'productdetail' anotherproduct.slug %}">
-                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image">
                             </a>
                         </div>
 
@@ -267,6 +286,15 @@
                         <div class="shopping-button d-flex justify-content-center my-3">
                             <button class="btn">Sepete Ekle</button>
                         </div>
+                        {% if anotherproduct in request.user.favorites.all %}
+                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                        </div>
+                        {% else %}
+                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -288,10 +316,10 @@
                 </div>
                 {% for anotherproduct in anotherproducts3 %}
                 <div class="col-md-2">
-                    <div class="card" id="carousel-card">
+                    <div class="card" id="carousel-card" data-product-name="{{ anotherproduct.slug }}">
                         <div class="image-container">
                             <a href="{% url 'productdetail' anotherproduct.slug %}">
-                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                <img src="{{ anotherproduct.images.first.images.url }}" class="img-fluid" id="anotherproducts-image">
                             </a>
                         </div>
 
@@ -318,6 +346,16 @@
                         <div class="shopping-button d-flex justify-content-center my-3">
                             <button class="btn">Sepete Ekle</button>
                         </div>
+                        {% if anotherproduct in request.user.favorites.all %}
+                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                        </div>
+                        {% else %}
+                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                        </div>
+                        {% endif %}
+                        
                     </div>
                 </div>
                 {% endfor %}

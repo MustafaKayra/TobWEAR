@@ -41,6 +41,9 @@ const cardAddBasketButton = document.querySelectorAll(".carddetail-addbasket")
 
 const basketOrderTitle = document.querySelectorAll(".product-info-h2")
 
+const favoriteButton = document.querySelectorAll(".addfavorite-button")
+const deleteFavoriteButton = document.querySelectorAll(".deletefavorite-button")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -291,6 +294,11 @@ if (addBasketButton) {
                 size: size
             })
         })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/shoppingcard/"
+            }
+        })
     })
 }
 
@@ -455,5 +463,61 @@ if (basketOrderTitle) {
         } else if (length > 20) {
             title.style.fontSize = "22px"
         }
+    })
+}
+
+
+if (favoriteButton) {
+    favoriteButton.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            let targetCard = btn.closest(".card")
+            let productName = targetCard.getAttribute("data-product-name")
+
+            fetch(`/productdetail/${productSlug}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    favoriteProductName: productName
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
+    })
+}
+
+
+if (deleteFavoriteButton) {
+    deleteFavoriteButton.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            let targetCard = btn.closest(".card")
+            let productName = targetCard.getAttribute("data-product-name")
+
+            fetch(`/productdetail/${productSlug}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    deleteFavoriteProductName: productName
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
+        })
     })
 }

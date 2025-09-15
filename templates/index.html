@@ -104,9 +104,9 @@
                         <div class="row w-100 carousel-row mr-0 ml-0">
                             {% for product in mostratedproducts1 %}
                             <div class="col-md-4 mb-5 mt-5">
-                                <div class="card" id="carousel-card">
+                                <div class="card" id="carousel-card" data-product-name="{{ product.name }}">
                                     <div class="image-container">
-                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image">
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
@@ -132,6 +132,15 @@
                                     <div class="shopping-button d-flex justify-content-center my-3">
                                         <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
                                     </div>
+                                    {% if product in request.user.favorites.all %}
+                                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             {% endfor %}
@@ -141,7 +150,7 @@
                         <div class="row w-100 carousel-row mr-0 ml-0">
                             {% for product in mostratedproducts2 %}
                             <div class="col-md-4 mb-5 mt-5">
-                                <div class="card" id="carousel-card">
+                                <div class="card" id="carousel-card" data-product-name="{{ product.name }}">
                                     <div class="image-container">
                                         <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
                                     </div>
@@ -169,6 +178,15 @@
                                     <div class="shopping-button d-flex justify-content-center my-3">
                                         <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
                                     </div>
+                                    {% if product in request.user.favorites.all %}
+                                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             {% endfor %}
@@ -178,9 +196,9 @@
                         <div class="row w-100 carousel-row mr-0 ml-0">
                             {% for product in mostratedproducts3 %}
                             <div class="col-md-4 mb-5 mt-5">
-                                <div class="card" id="carousel-card">
+                                <div class="card" id="carousel-card" data-product-name="{{ product.name }}">
                                     <div class="image-container">
-                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image"><span><button class="btn favorite-button"><i class="fa-solid fa-heart favorite-icon"></i></button></span>
+                                        <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image">
                                     </div>
 
                                     <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
@@ -206,8 +224,20 @@
                                     <div class="shopping-button d-flex justify-content-center my-3">
                                         <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
                                     </div>
+                                    {% if product in request.user.favorites.all %}
+                                        <div class="deletefavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="addfavorite-button d-flex justify-content-center my-3">
+                                            <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
+                            <script>
+                                const productSlug = "{{ product.slug }}"
+                            </script>
                             {% endfor %}
                         </div>
                     </div>
