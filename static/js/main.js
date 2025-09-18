@@ -44,6 +44,8 @@ const basketOrderTitle = document.querySelectorAll(".product-info-h2")
 const favoriteButton = document.querySelectorAll(".addfavorite-button")
 const deleteFavoriteButton = document.querySelectorAll(".deletefavorite-button")
 
+const favoritesDropdownListItems = document.querySelectorAll(".favoritesdropdownlistitem")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -520,4 +522,64 @@ if (deleteFavoriteButton) {
             })
         })
     })
+}
+
+
+
+if (favoritesDropdownListItems) {
+
+    let category = null
+
+    favoritesDropdownListItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            category = item.textContent.trim()
+
+            fetch("/favorites/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    category: category
+                }),
+            })
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector("#products-container").innerHTML = html;
+                });
+        })
+    })
+
+    if (minPriceInput && maxPriceInput && priceButton) {
+        priceButton.addEventListener("click", (e) => {
+            e.preventDefault()
+            console.log("Buton Çalıştı")
+
+            const minimumPriceValue = minPriceInput.value
+            const maximumPriceValue = maxPriceInput.value
+
+            console.log(minimumPriceValue)
+            console.log(maximumPriceValue)
+            console.log("Kategori: " + category)
+
+            fetch("/favorites/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    category: category,
+                    minimumPriceValue: minimumPriceValue,
+                    maximumPriceValue: maximumPriceValue
+                })
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.querySelector("#products-container").innerHTML = html;
+            });
+        })
+    }
 }

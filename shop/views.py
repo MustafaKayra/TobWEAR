@@ -118,7 +118,69 @@ def shoppingcart(request):
 
 
 def favorites(request):
-    return render(request,"favorites.html")
+    customer = request.user
+    products = customer.favorites.all()
+    categories = ProductCategory.objects.filter(product__in=products).distinct()
+
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            data = {}
+
+        if "category" in data or "minimumPriceValue" in data or "maximumPriceValue" in data:
+            category_name = data.get("category")
+            minprice = data.get("minimumPriceValue")
+            maxprice = data.get("maximumPriceValue")
+            print("Fiyat Filtre Değerleri: ",minprice, maxprice)
+            
+
+            if category_name:
+                products = products.filter(category__name=category_name)
+                print(products)
+                print("Kategori Filtresi Çalıştı")
+
+            if minprice:
+                print("Minprice kontrolü")
+                products = products.filter(price__gte=minprice, category__name=category_name)
+
+            if maxprice:
+                print("Maxprice kontrolü")
+                products = products.filter(price__lte=maxprice, category__name=category_name)
+        
+
+        elif "productId" in data:
+            data = json.loads(request.body)
+            productId = data.get("productId")
+            colorname = data.get("color")
+            sizename = data.get("size")
+
+            color = ProductColor.objects.get(color=colorname)
+            size = ProductSize.objects.get(size=sizename)
+            product = Product.objects.get(id=productId)
+            neworder = OrderItem.objects.create(product=product, color=color, size=size, amount=1)
+            print("Yeni Sipariş:", neworder)
+            
+            if ShoppingCard.objects.get(customer=request.user):
+                card = ShoppingCard.objects.get(customer=request.user)
+                card.orders.add(neworder)
+                print("Ürün Eklendi")
+            else:
+                newcard = ShoppingCard.objects.create(customer=request.user)
+                newcard.orders.add(neworder)
+                print("Ürün Yeni Sepete Eklendi")
+        
+        context = {
+            "products": products,
+            "categories": categories
+        }
+        return render(request,"partials/favorites_list.html",context)
+
+    context = {
+        "products": products,
+        "categories": categories
+    }
+    return render(request,"favorites.html",context)
 
 
 def productdetail(request,slug):

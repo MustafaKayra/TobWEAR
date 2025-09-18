@@ -1782,3 +1782,7 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
     color: #fff;
     width: 70%;
 }
+
+.favoritesdropdownlistitem:hover {
+    background-color: var(--custom-orange);
+}
