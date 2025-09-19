@@ -20,7 +20,16 @@ def index(request):
     return render(request,"index.html",context)
 
 def about(request):
-    return render(request,"about.html")
+    mostratedproducts1 = Product.objects.filter().order_by("name")[:3]
+    mostratedproducts2 = Product.objects.filter().order_by("discounted")[:3]
+    mostratedproducts3 = Product.objects.filter().order_by("price")[:3]
+
+    context = {
+        "mostratedproducts1": mostratedproducts1,
+        "mostratedproducts2": mostratedproducts2,
+        "mostratedproducts3": mostratedproducts3
+    }
+    return render(request,"about.html",context)
 
 
 def products(request):
