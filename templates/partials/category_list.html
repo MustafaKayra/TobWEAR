@@ -1,0 +1,49 @@
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-3 mb-3">
+        <div class="card" id="carousel-card" data-product-name="{{ product.name }}">
+            <div class="product-image-container">
+                <a href="{% url 'productdetail' product.slug %}">
+                    <img src="{{ product.images.first.images.url }}" class="img-fluid" id="carousel-image">
+                </a>
+            </div>
+
+            <div class="product-detail-container py-3 d-flex flex-column justify-content-center">
+                <h3 class="text-center px-3" id="product-detail-title">{{ product.name }}</h3>
+                <p class="text-center text-white px-3 fs-4">{{ product.discounted }} TL</p>
+                <span class="fs-6 text-center" id="product-detail-span">{{ product.price }} TL</span>
+            </div>
+
+            <div class="shopping-container d-flex justify-content-center my-3">
+                {% for size in product.sizes.all %}
+                <input type="radio" class="btn-check" name="size" id="size-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ size.size }}">
+                <label class="btn btn-outline-primary sizebutton mx-1 mb-2" for="size-{{ forloop.counter }}-{{ product.id }}">{{ size }}</label>
+                {% endfor %}
+            </div>
+
+            <div class="shopping-container d-flex justify-content-center">
+                {% for color in product.colors.all %}
+                <input type="radio" class="btn-check" name="color" id="color-{{ forloop.counter }}-{{ product.id }}" autocomplete="off" value="{{ color.color }}">
+                <label class="btn btn-outline-primary partialdetail-colorbutton mx-1 mb-4" for="color-{{ forloop.counter }}-{{ product.id }}" style="background: linear-gradient(45deg, {{ color.code }}, {{ color.code2 }});"></label>
+                {% endfor %}
+            </div>
+
+            <div class="shopping-button d-flex justify-content-center my-3">
+                <button class="btn carddetail-addbasket" value="{{ product.id }}">Sepete Ekle</button>
+            </div>
+            {% if product in request.user.favorites.all %}
+                <div class="deletefavorite-button d-flex justify-content-center my-3">
+                    <button class="btn" name="deleteFavoriteButton">Favorilerden Çıkar</button>
+                </div>
+            {% else %}
+                <div class="addfavorite-button d-flex justify-content-center my-3">
+                    <button class="btn" name="favoriteButton">Favorilere Ekle</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        const productSlug = "{{ product.slug }}"
+    </script>
+    {% endfor %}
+</div>

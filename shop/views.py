@@ -10,11 +10,15 @@ def index(request):
     mostratedproducts1 = Product.objects.filter().order_by("name")[:3]
     mostratedproducts2 = Product.objects.filter().order_by("discounted")[:3]
     mostratedproducts3 = Product.objects.filter().order_by("price")[:3]
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     context = {
         "mostratedproducts1": mostratedproducts1,
         "mostratedproducts2": mostratedproducts2,
-        "mostratedproducts3": mostratedproducts3
+        "mostratedproducts3": mostratedproducts3,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
 
     return render(request,"index.html",context)
@@ -354,3 +358,46 @@ def payment(request):
             print("Ödemeniz Başarısız Oldu, Kart Ve Adres Bilgilerinizi Kontrol Ediniz")
             print(payment_result)
             return redirect('updateuser')
+        
+
+def categorydetail(request, name):
+    category = ProductCategory.objects.get(name=name)
+    products = Product.objects.filter(category=category)
+
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            data = {}
+
+        if "category" in data or "minimumPriceValue" in data or "maximumPriceValue" in data:
+            category_name = data.get("category")
+            minprice = data.get("minimumPriceValue")
+            maxprice = data.get("maximumPriceValue")
+            print("Fiyat Filtre Değerleri: ",minprice, maxprice)
+            
+
+            if category_name:
+                products = products.filter(category__name=category_name)
+                print(products)
+                print("Kategori Filtresi Çalıştı")
+
+            if minprice:
+                print("Minprice kontrolü")
+                products = products.filter(price__gte=minprice, category__name=category_name)
+
+            if maxprice:
+                print("Maxprice kontrolü")
+                products = products.filter(price__lte=maxprice, category__name=category_name)
+        
+        context = {
+            "products": products,
+            "category": category
+        }
+        return render(request,"partials/category_list.html",context)
+
+    context = {
+        "category": category,
+        "products": products
+    }
+    return render(request,"categorydetail.html",context)

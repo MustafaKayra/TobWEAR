@@ -46,6 +46,11 @@ const deleteFavoriteButton = document.querySelectorAll(".deletefavorite-button")
 
 const favoritesDropdownListItems = document.querySelectorAll(".favoritesdropdownlistitem")
 
+const categoryMinPriceInput = document.querySelector("#categoryinputPrice1")
+const categoryMaxPriceInput = document.querySelector("#categoryinputPrice2")
+const categoryPriceButton = document.querySelector(".categorypricebutton")
+const categoryName = document.querySelector(".products-title")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -282,7 +287,7 @@ if (addBasketButton) {
 
         const selectedSize = document.querySelector('input[name="size"]:checked')
         const size = selectedSize.value
-        
+
 
         fetch(`/productdetail/${productSlug}`, {
             method: "POST",
@@ -296,11 +301,11 @@ if (addBasketButton) {
                 size: size
             })
         })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = "/shoppingcard/"
-            }
-        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/shoppingcard/"
+                }
+            })
     })
 }
 
@@ -364,11 +369,11 @@ if (orderPlusButtonAll && orderMinusButtonAll && orderQuantityAll && orderDelete
                     orderId: orderId
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 
@@ -389,11 +394,11 @@ if (orderPlusButtonAll && orderMinusButtonAll && orderQuantityAll && orderDelete
                     orderDelete: true
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 
@@ -414,11 +419,11 @@ if (orderPlusButtonAll && orderMinusButtonAll && orderQuantityAll && orderDelete
                     orderDelete: true
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 }
@@ -447,11 +452,11 @@ if (cardAddBasketButton) {
                     size: size
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 }
@@ -487,11 +492,11 @@ if (favoriteButton) {
                     favoriteProductName: productName
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 }
@@ -515,11 +520,11 @@ if (deleteFavoriteButton) {
                     deleteFavoriteProductName: productName
                 })
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload()
-                }
-            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                })
         })
     })
 }
@@ -576,10 +581,43 @@ if (favoritesDropdownListItems) {
                     maximumPriceValue: maximumPriceValue
                 })
             })
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector("#products-container").innerHTML = html;
+                });
+        })
+    }
+}
+
+
+if (categoryMinPriceInput && categoryMaxPriceInput && categoryPriceButton) {
+    categoryPriceButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        console.log("Buton Çalıştı")
+
+        category = categoryName.textContent.trim()
+        const minimumPriceValue = categoryMinPriceInput.value
+        const maximumPriceValue = categoryMaxPriceInput.value
+
+        console.log(minimumPriceValue)
+        console.log(maximumPriceValue)
+        console.log("Kategori: " + category)
+
+        fetch(`/category/${category}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+                category: category,
+                minimumPriceValue: minimumPriceValue,
+                maximumPriceValue: maximumPriceValue
+            })
+        })
             .then(response => response.text())
             .then(html => {
                 document.querySelector("#products-container").innerHTML = html;
             });
-        })
-    }
+    })
 }
