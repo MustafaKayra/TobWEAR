@@ -27,11 +27,15 @@ def about(request):
     mostratedproducts1 = Product.objects.filter().order_by("name")[:3]
     mostratedproducts2 = Product.objects.filter().order_by("discounted")[:3]
     mostratedproducts3 = Product.objects.filter().order_by("price")[:3]
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     context = {
         "mostratedproducts1": mostratedproducts1,
         "mostratedproducts2": mostratedproducts2,
-        "mostratedproducts3": mostratedproducts3
+        "mostratedproducts3": mostratedproducts3,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
     return render(request,"about.html",context)
 
@@ -39,6 +43,8 @@ def about(request):
 def products(request):
     productobjects = Product.objects.all()
     categories = ProductCategory.objects.filter(product__in=productobjects).distinct()
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
         try:
@@ -93,21 +99,30 @@ def products(request):
     
     context = {
         "productobjects": productobjects,
-        "categories": categories
+        "categories": categories,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
     return render(request,"products.html", context)
 
 
 def shoppingcart(request):
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
+
     if ShoppingCard.objects.filter(customer=request.user):
         shoppingcard = ShoppingCard.objects.get(customer=request.user)
         context = {
-            "shoppingcard": shoppingcard
+            "shoppingcard": shoppingcard,
+            "footerproducts": footerproducts,
+            "footercategorys": footercategorys
         }
     
     else:
         context = {
-            "shoppingcard": None
+            "shoppingcard": None,
+            "footerproducts": footerproducts,
+            "footercategorys": footercategorys
         }
 
     if request.method == "POST":
@@ -134,6 +149,8 @@ def favorites(request):
     customer = request.user
     products = customer.favorites.all()
     categories = ProductCategory.objects.filter(product__in=products).distinct()
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
         try:
@@ -191,7 +208,9 @@ def favorites(request):
 
     context = {
         "products": products,
-        "categories": categories
+        "categories": categories,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
     return render(request,"favorites.html",context)
 
@@ -203,6 +222,8 @@ def productdetail(request,slug):
     anotherproducts2 = Product.objects.filter(category__name=product.category.name)[:4]
     anotherproducts3 = Product.objects.filter().order_by("price")[:4]
     customer = request.user
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
         try:
@@ -257,7 +278,9 @@ def productdetail(request,slug):
         "productfeatures": productfeatures,
         "anotherproducts1": anotherproducts1,
         "anotherproducts2": anotherproducts2,
-        "anotherproducts3": anotherproducts3
+        "anotherproducts3": anotherproducts3,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
     return render(request,"productdetail.html",context)
 
@@ -363,6 +386,8 @@ def payment(request):
 def categorydetail(request, name):
     category = ProductCategory.objects.get(name=name)
     products = Product.objects.filter(category=category)
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
         try:
@@ -398,6 +423,8 @@ def categorydetail(request, name):
 
     context = {
         "category": category,
-        "products": products
+        "products": products,
+        "footerproducts": footerproducts,
+        "footercategorys": footercategorys
     }
     return render(request,"categorydetail.html",context)

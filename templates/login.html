@@ -99,29 +99,25 @@
                 
                 <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
                     <h2 class="text-center pb-2" id="footer-products-title">Ürünler</h2>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    {% for product in footerproducts %}
+                    <a href="{% url 'productdetail' product.slug %}" class="footer-products-a"><p class="footer-products text-white">{{ product.name }}</p></a>
+                    {% endfor %}
                 </div>
 
                 <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
                     <h2 class="text-center pb-2" id="footer-products-title">Kategoriler</h2>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    {% for category in footercategorys %}
+                    <a href="{% url 'categorydetail' category.name %}" class="footer-products-a"><p class="footer-products text-white">{{ category.name }}</p></a>
+                    {% endfor %}
                 </div>
 
                 <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
                     <h2 class="text-center pb-2" id="footer-products-title">Menü</h2>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
-                    <a href="#" class="footer-products-a"><p class="footer-products text-white">Lorem, ipsum dolor.</p></a>
+                    <a href="{% url 'about' %}" class="footer-products-a"><p class="footer-products text-white">Hakkımızda</p></a>
+                    <a href="{% url 'products' %}" class="footer-products-a"><p class="footer-products text-white">Ürünler</p></a>
+                    <a href="{% url 'login' %}" class="footer-products-a"><p class="footer-products text-white">Giriş</p></a>
+                    <a href="{% url 'register' %}" class="footer-products-a"><p class="footer-products text-white">Kayıt</p></a>
+                    <a href="{% url 'index' %}" class="footer-products-a"><p class="footer-products text-white">Anasayfa</p></a>
                 </div>
             </div>
             <div class="row mt-5">

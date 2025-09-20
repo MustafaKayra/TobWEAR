@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
+from shop.models import Product, ProductCategory
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import login,authenticate,logout
 
 def loginuser(request):
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
+
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -20,10 +24,13 @@ def loginuser(request):
             print(form.errors)
     else:
         form = LoginForm()
-    return render(request,"login.html",{"form":form})
+    return render(request,"login.html",{"form":form, "footerproducts":footerproducts, "footercategorys":footercategorys})
 
 
 def register(request):
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
+
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -35,10 +42,13 @@ def register(request):
             print(form.errors)
     else:
         form = RegisterForm()
-    return render(request,"register.html",{"form":form})
+    return render(request,"register.html",{"form":form, "footerproducts":footerproducts, "footercategorys":footercategorys})
 
 
 def updateuser(request):
+    footerproducts = Product.objects.filter()[:5]
+    footercategorys = ProductCategory.objects.filter()[:5]
+
     if request.method == "POST":
         form = RegisterForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -50,4 +60,4 @@ def updateuser(request):
             print(form.errors)
     else:
         form = RegisterForm()
-    return render(request,"updateuser.html",{"form":form})
+    return render(request,"updateuser.html",{"form":form, "footerproducts":footerproducts, "footercategorys":footercategorys})
