@@ -46,6 +46,9 @@ def register(request):
 
 
 def updateuser(request):
+    if not request.user.is_authenticated:
+        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+        return redirect('login')
     footerproducts = Product.objects.filter()[:5]
     footercategorys = ProductCategory.objects.filter()[:5]
 

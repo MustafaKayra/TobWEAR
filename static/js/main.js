@@ -301,11 +301,15 @@ if (addBasketButton) {
                 size: size
             })
         })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = "/shoppingcard/"
-                }
-            })
+        .then(response => {
+            if (response.status === 401) {
+                window.location.href = "/login/"
+            }
+
+            if (response.ok) {
+                window.location.href = "/shoppingcard/"
+            }
+        })
     })
 }
 
@@ -452,11 +456,15 @@ if (cardAddBasketButton) {
                     size: size
                 })
             })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload()
-                    }
-                })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload()
+                }
+
+                if (response.status === 401) {
+                    window.location.href = "/login/"
+                }
+            })
         })
     })
 }
@@ -492,11 +500,15 @@ if (favoriteButton) {
                     favoriteProductName: productName
                 })
             })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload()
-                    }
-                })
+            .then(response => {
+                if (response.status === 401) {
+                    window.location.href = "/login/"
+                }
+
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
         })
     })
 }
@@ -520,11 +532,15 @@ if (deleteFavoriteButton) {
                     deleteFavoriteProductName: productName
                 })
             })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload()
-                    }
-                })
+            .then(response => {
+                if (response.status === 401) {
+                    window.location.href = "/login/"
+                }
+
+                if (response.ok) {
+                    window.location.reload()
+                }
+            })
         })
     })
 }
@@ -550,10 +566,10 @@ if (favoritesDropdownListItems) {
                     category: category
                 }),
             })
-                .then(response => response.text())
-                .then(html => {
-                    document.querySelector("#products-container").innerHTML = html;
-                });
+            .then(response => response.text())
+            .then(html => {
+                document.querySelector("#products-container").innerHTML = html;
+            });
         })
     })
 

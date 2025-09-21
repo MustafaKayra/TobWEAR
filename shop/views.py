@@ -4,6 +4,7 @@ from users.models import CustomUser
 import json
 from django.core.exceptions import ValidationError
 import iyzipay
+from django.http import HttpResponse
 
 
 def index(request):
@@ -47,6 +48,9 @@ def products(request):
     footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
+        if not request.user.is_authenticated:
+            print("Bu İşlemi Gerçekleştirebilmek İçin Oturum Açmalısınız")
+            return HttpResponse(status=401)
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -84,8 +88,8 @@ def products(request):
             neworder = OrderItem.objects.create(product=product, color=color, size=size, amount=1)
             print("Yeni Sipariş:", neworder)
             
-            if ShoppingCard.objects.get(customer=request.user):
-                card = ShoppingCard.objects.get(customer=request.user)
+            if ShoppingCard.objects.filter(customer=request.user,ordered=False).exists():
+                card = ShoppingCard.objects.get(customer=request.user,ordered=False)
                 card.orders.add(neworder)
                 print("Ürün Eklendi")
             else:
@@ -107,11 +111,14 @@ def products(request):
 
 
 def shoppingcart(request):
+    if not request.user.is_authenticated:
+        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+        return HttpResponse(status=401)
     footerproducts = Product.objects.filter()[:5]
     footercategorys = ProductCategory.objects.filter()[:5]
 
-    if ShoppingCard.objects.filter(customer=request.user):
-        shoppingcard = ShoppingCard.objects.get(customer=request.user)
+    if ShoppingCard.objects.filter(customer=request.user,ordered=False):
+        shoppingcard = ShoppingCard.objects.get(customer=request.user,ordered=False)
         context = {
             "shoppingcard": shoppingcard,
             "footerproducts": footerproducts,
@@ -146,6 +153,9 @@ def shoppingcart(request):
 
 
 def favorites(request):
+    if not request.user.is_authenticated:
+        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+        return HttpResponse(status=401)
     customer = request.user
     products = customer.favorites.all()
     categories = ProductCategory.objects.filter(product__in=products).distinct()
@@ -226,6 +236,9 @@ def productdetail(request,slug):
     footercategorys = ProductCategory.objects.filter()[:5]
 
     if request.method == "POST":
+        if not request.user.is_authenticated:
+            print("Bu İşlemi Gerçekleştirebilmek İçin Oturum Açmalısınız")
+            return HttpResponse(status=401)
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
@@ -238,14 +251,14 @@ def productdetail(request,slug):
             color = ProductColor.objects.get(color=colorname)
             size = ProductSize.objects.get(size=sizename)
 
-            card = ShoppingCard.objects.get(customer=request.user)
+            card = ShoppingCard.objects.get(customer=request.user,ordered=False)
             if card.orders.filter(product=product).exists():
                 raise ValidationError("Bu üründen zaten sepette var!")
             else:
                 neworder = OrderItem.objects.create(product=product,amount=amount,color=color,size=size)
 
-            if ShoppingCard.objects.filter(customer=request.user).exists():
-                card = ShoppingCard.objects.get(customer=request.user)
+            if ShoppingCard.objects.filter(customer=request.user,ordered=False).exists():
+                card = ShoppingCard.objects.get(customer=request.user,ordered=False)
                 card.orders.add(neworder)
                 print("Alışveriş Sepetine Ürün Eklendi")
             else:
@@ -254,20 +267,32 @@ def productdetail(request,slug):
                 print("Alışveriş Sepeti Oluşturuldu")
 
         elif "favoriteButton" in request.POST:
+            if not request.user.is_authenticated:
+                print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+                return redirect('login')
             customer.favorites.add(product)
             print("Favorilere Eklendi")
         
         elif "deleteFavoriteButton" in request.POST:
+            if not request.user.is_authenticated:
+                print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+                return redirect('login')
             customer.favorites.remove(product)
             print("Favorilerden Kaldırıldı")
 
         elif "favoriteProductName" in data:
+            if not request.user.is_authenticated:
+                print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+                return redirect('login')
             productname = data.get("favoriteProductName")
             print("Ürün İsmi: ",productname)
             targetproduct = Product.objects.get(name=productname)
             customer.favorites.add(targetproduct)
 
         elif "deleteFavoriteProductName" in data:
+            if not request.user.is_authenticated:
+                print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+                return redirect('login')
             productname = data.get("deleteFavoriteProductName")
             print("Ürün İsmi: ",productname)
             targetproduct = Product.objects.get(name=productname)
@@ -286,8 +311,14 @@ def productdetail(request,slug):
 
 
 def payment(request):
+    if not request.user.is_authenticated:
+        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+        return redirect('login')
     customer = request.user
     card = ShoppingCard.objects.get(customer=request.user)
+
+    if customer.cardnumber is None or customer.cardexpire is None or customer.cvc is None or customer.gsmnumber is None or customer.adress is None or customer.city is None or customer.country is None or customer.zipcode is None:
+        raise ValidationError("Ödeme İşlemine Devam Edilemiyor, Lütfen Ödeme Bilgilerinizi Düzenleyin")
 
     if request.method == "POST":
         options = {
@@ -368,6 +399,7 @@ def payment(request):
             'billingAddress': address, #Fatura Adresi
             'basketItems': basket_items #Sepet Öğeleri
         }
+
 
         payment = iyzipay.Payment().create(payment_request, options)
         payment_result = json.loads(payment.read().decode('utf-8'))
