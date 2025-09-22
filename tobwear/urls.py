@@ -17,5 +17,6 @@ urlpatterns = [
     path('favorites/',views.favorites,name="favorites"),
     path('productdetail/<slug:slug>',views.productdetail,name="productdetail"),
     path('payment/',views.payment,name="payment"),
-    path('category/<str:name>',views.categorydetail,name="categorydetail")
+    path('category/<str:name>',views.categorydetail,name="categorydetail"),
+    path('fastpayment/<slug:slug>',views.fastpayment,name="fastpayment")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -159,7 +159,11 @@
                         <button class="minus-button mx-4"><i class="fa-solid fa-minus" style="color: #c26100;"></i></button>
                     </div>
                 <button class="btn productdetail-addbasket my-4 w-50">Sepete Ekle</button>
-                <button class="btn productdetail-fastbutton w-50">Hemen Satın Al</button>
+                <div class="payment-button w-50">
+                    <form action="{% url 'fastpayment' product.slug %}" method="post" class="d-inline-block w-100">
+                        <button class="btn productdetail-fastbutton px-5 w-100" name="fastpayment">Hemen Satın Al</button>
+                    <form>
+                </div>
                 {% if product in request.user.favorites.all %}
                 <form method="post" class="favoriteform w-100">
                 {% csrf_token %}

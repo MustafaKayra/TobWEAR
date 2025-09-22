@@ -5,6 +5,7 @@ import json
 from django.core.exceptions import ValidationError
 import iyzipay
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -110,10 +111,8 @@ def products(request):
     return render(request,"products.html", context)
 
 
+@login_required(login_url="/login/")
 def shoppingcart(request):
-    if not request.user.is_authenticated:
-        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
-        return HttpResponse(status=401)
     footerproducts = Product.objects.filter()[:5]
     footercategorys = ProductCategory.objects.filter()[:5]
 
@@ -460,3 +459,104 @@ def categorydetail(request, name):
         "footercategorys": footercategorys
     }
     return render(request,"categorydetail.html",context)
+
+
+def fastpayment(request, slug):
+    if not request.user.is_authenticated:
+        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
+        return redirect('login')
+    customer = request.user
+    product = Product.objects.get(slug=slug)
+
+    if customer.cardnumber is None or customer.cardexpire is None or customer.cvc is None or customer.gsmnumber is None or customer.adress is None or customer.city is None or customer.country is None or customer.zipcode is None:
+        raise ValidationError("Ödeme İşlemine Devam Edilemiyor, Lütfen Ödeme Bilgilerinizi Düzenleyin")
+
+    if request.method == "POST":
+        options = {
+            'api_key': 'sandbox-LC3nNJCVAqA1QZYlFSreYK5VO3nYIDlE',
+            'secret_key': 'sandbox-kOflXwc5MbTldBKuogFADjFlrQlKsMfS',
+            'base_url': 'sandbox-api.iyzipay.com',
+        }
+
+        payment_card = {
+            'cardHolderName': customer.first_name +" "+ customer.last_name, #Kart Sahibinin Adı
+            'cardNumber': customer.cardnumber, #Kart Numarası
+            'expireMonth': customer.cardexpire.split("/")[0].strip(), #Kartın Son Kullanma Ayı
+            'expireYear': customer.cardexpire.split("/")[1].strip(), #Kartın Son Kullanma Yılı
+            'cvc': customer.cvc, #Kartın Güvenlik Numarası
+            'registeredCart': '1' #Kartı Kaydedip Kaydetmeme Durumu '0' Kaydetmez '1' Kaydeder
+        }
+
+        buyer = {
+            'id': str(customer.id), #Alıcının ID'si
+            'name': customer.first_name, #Alıcının Adı
+            'surname': customer.last_name, #Alıcının Soyadı
+            'gsmNumber': customer.gsmnumber, #Alıcının Telefon Numarası
+            'email': customer.email, #Alıcının Emaili
+            'identityNumber': '74300864791', #Alıcının Kimlik Numarası
+            'lastLoginDate': '2015-10-05 12:43:35', #Alıcının Son Giriş Yaptığı Tarih
+            'registrationDate': '2013-04-21 15:12:09', #Alıcının Kayıt Olduğu Tarih
+            'registrationAddress': customer.adress, #Alıcının Kayıtlı Olduğu Adresi
+            'ip': request.META.get('REMOTE_ADDR'), #Alıcının IP Adresi
+            'city': customer.city, #Alıcının Yaşadığı Şehir
+            'country': customer.country, #Alıcının Yaşadığı Ülke
+            'zipCode': customer.zipcode, #Alıcının Posta Kodu
+        }
+
+        address = {
+            'contactName': customer.first_name +" "+ customer.last_name, #Adresle İlgili Kişinin Adı
+            'city': customer.city, #Şehir
+            'country': customer.country, #Ülke
+            'address': customer.adress, #Adres Detayları
+            'zipCode': customer.zipcode #Posta Kodu
+        }
+
+        if product.discounted:
+            basket_item = {
+                "id": str(product.id),
+                "name": product.name,
+                "category1": str(product.category.name),
+                "category2": str(product.name),
+                "itemType": 'PHYSICAL',
+                "price": str(product.discounted),
+                "quantity": str(1) 
+            }
+        else:
+            basket_item = {
+                "id": str(product.id),
+                "name": product.name,
+                "category1": str(product.category.name),
+                "category2": str(product.name),
+                "itemType": 'PHYSICAL',
+                "price": str(product.price),
+                "quantity": str(1) 
+            }
+
+
+        payment_request = {
+            'locale': 'tr', #Dil ve yerel ayar
+            'conversationId': '123456789', #İsteğin Konuşma Id'si
+            'price': str(basket_item["price"]), #Toplam Tutar(Vergiler Hariç)
+            'paidPrice': str(basket_item["price"]), #Ödenen Toplam Tutar(Vergiler Dahil)
+            'currency': 'TRY', #Para Birimi
+            'installment': '1', #Taksit Sayısı
+            'basketId': str(product.id), #Sepet ID'si
+            'paymentChannel': 'WEB', #Ödeme Kanalı
+            'paymentGroup': 'PRODUCT', #Ödeme Grubu('PRODUCT' ürün ödemesi için)
+            'paymentCard': payment_card, #Ödeme Kartı Bilgileri
+            'buyer': buyer, #Alıcı Bilgileri,
+            'shippingAddress': address, #Teslimat Adresi
+            'billingAddress': address, #Fatura Adresi
+            'basketItems': [basket_item] #Sepet Öğeleri
+        }
+
+
+        payment = iyzipay.Payment().create(payment_request, options)
+        payment_result = json.loads(payment.read().decode('utf-8'))
+        if payment_result.get("status") == "success":
+            print("Ödeme Başarıyla Gerçekleşti, Siparişiniz Hazırlanıyor")
+            return redirect('index')
+        elif payment_result.get("status") == "failure":
+            print("Ödemeniz Başarısız Oldu, Kart Ve Adres Bilgilerinizi Kontrol Ediniz")
+            print(payment_result)
+            return redirect('updateuser')
