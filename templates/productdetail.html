@@ -63,24 +63,24 @@
         <div class="row">
             <div class="col-md-6 py-5 d-flex flex-column justify-content-center">
                 <div class="main-images my-4 d-flex justify-content-center">
-                {% for image in product.images.all %}
-                    <div class="default-image active" id="exampleImage{{ image.id }}">
-                        <img src="{{ image.images.url }}" class="d-block img-fluid main-image"
-                            data-bs-toggle="modal" data-bs-target="#pop-up-image">
+                    {% for image in product.images.all %}
+                    <div class="default-image {% if forloop.first %}active{% endif %}" id="exampleImage{{ image.id }}">
+                        <img src="{{ image.images.url }}" class="d-block img-fluid main-image" data-bs-toggle="modal" data-bs-target="#pop-up-image">
                         <div class="productdetail-imageinfo">
                             <p class="productdetail-imageinfotext">Son 24 Saat!</p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
                 <div class="thumb-images d-flex justify-content-center">
                     <div class="row">
+                        {% for image in product.images.all %}
                         <div class="col-md-3">
-                            <img src="{{ image.images.url }}" class="d-block img-fluid thumb-image"
-                                id="exampleImage{{ image.id }}">
+                            <img src="{{ image.images.url }}" class="d-block img-fluid thumb-image" id="exampleImage{{ image.id }}">
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
-
                 <div class="modal fade" id="pop-up-image" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content bg-transparent border-0 shadow-none">
@@ -88,18 +88,19 @@
                                 <div class="row">
                                     <div class="col-md-12 py-5 d-flex flex-column justify-content-center">
                                         <div class="main-images my-4 d-flex justify-content-center">
-                                            <div class="popupdefault-image active" id="exampleImage{{ image.id }}">
-                                                <img src="{{ image.images.url }}"
-                                                    class="d-block img-fluid popupmain-image" data-bs-toggle="modal"
-                                                    data-bs-target="#pop-up-image">
+                                            {% for image in product.images.all %}
+                                            <div class="popupdefault-image {% if forloop.first %}active{% endif %}" id="exampleImage{{ image.id }}">
+                                                <img src="{{ image.images.url }}" class="d-block img-fluid popupmain-image" data-bs-toggle="modal" data-bs-target="#pop-up-image">
                                             </div>
+                                            {% endfor %}
                                         </div>
                                         <div class="thumb-images d-flex justify-content-center">
                                             <div class="row">
+                                                {% for image in product.images.all %}
                                                 <div class="col-md-3">
-                                                    <img src="{{ image.images.url }}"
-                                                        class="d-block img-fluid popupthumb-image" id="exampleImage{{ image.id }}">
+                                                    <img src="{{ image.images.url }}" class="d-block img-fluid popupthumb-image" id="exampleImage{{ image.id }}">
                                                 </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
@@ -108,8 +109,6 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-
             </div>
 
 
