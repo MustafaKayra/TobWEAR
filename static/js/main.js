@@ -51,6 +51,9 @@ const categoryMaxPriceInput = document.querySelector("#categoryinputPrice2")
 const categoryPriceButton = document.querySelector(".categorypricebutton")
 const categoryName = document.querySelector(".products-title")
 
+const pageHeader = document.querySelector(".page-header")
+const message = sessionStorage.getItem("Message")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -302,11 +305,13 @@ if (addBasketButton) {
             })
         })
         .then(response => {
-            if (response.status === 401) {
+            if (response.status === 401) { /* <div class="alert alert-{{ message.tags }} messagealerts">{{ message }}</div> */
+                sessionStorage.setItem("Message", "Bu İşlemi Gerçekleştirmek İçin Giriş Yapmalısınız!");
                 window.location.href = "/login/"
             }
 
             if (response.ok) {
+                sessionStorage.setItem("Message", "Ürün, Sepetinize Eklendi");
                 window.location.href = "/shoppingcard/"
             }
         })
@@ -462,6 +467,7 @@ if (cardAddBasketButton) {
                 }
 
                 if (response.status === 401) {
+                    sessionStorage.setItem("Message", "Bu İşlemi Gerçekleştirmek İçin Giriş Yapmalısınız!");
                     window.location.href = "/login/"
                 }
             })
@@ -502,6 +508,7 @@ if (favoriteButton) {
             })
             .then(response => {
                 if (response.status === 401) {
+                    sessionStorage.setItem("Message", "Bu İşlemi Gerçekleştirmek İçin Giriş Yapmalısınız!");
                     window.location.href = "/login/"
                 }
 
@@ -534,6 +541,7 @@ if (deleteFavoriteButton) {
             })
             .then(response => {
                 if (response.status === 401) {
+                    sessionStorage.setItem("Message", "Bu İşlemi Gerçekleştirmek İçin Giriş Yapmalısınız!");
                     window.location.href = "/login/"
                 }
 
@@ -636,4 +644,25 @@ if (categoryMinPriceInput && categoryMaxPriceInput && categoryPriceButton) {
                 document.querySelector("#products-container").innerHTML = html;
             });
     })
+}
+
+
+if (message) {
+    console.log("Çalıştı")
+    const div = document.createElement("div")
+    const button = document.createElement("button")
+    button.setAttribute("type", "button")
+    button.setAttribute("class", "btn-close")
+    button.setAttribute("data-bs-dismiss", "alert")
+    button.setAttribute("aria-label", "Close")
+    div.setAttribute("class", "alert alert-dismissible text-center messagealerts")
+    div.setAttribute("role", "alert")
+    div.textContent = message
+    div.style.width = "50%"
+    div.style.opacity = "0"
+    div.style.transform = "translateY(20px)"
+    div.style.animation = "ilkanimasyon 1.5s forwards"
+    div.appendChild(button)
+    pageHeader.appendChild(div)
+    sessionStorage.removeItem("Message")
 }

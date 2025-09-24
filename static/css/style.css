@@ -1870,3 +1870,33 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
     box-shadow: 0 0 10px #c26100;
     transform: translateY(0) scale(1.05);
 }
+
+.whatsapp-button {
+    border-radius: 50%;
+    background-color: #25D366;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 0 10px #128C7E;
+    border: 0px;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-button i {
+    color: #fff;
+    font-size: 60px; 
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.05);
+}
+
+.messagealerts {
+    background-color: #252524;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #124460;
+    color: #fff;
+}
