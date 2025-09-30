@@ -63,6 +63,18 @@
         <div class="row py-5 page-header d-flex justify-content-center">
             <h1 class="text-center login-title">Giriş Yap</h1>
             <p class="text-center text-white login-paragraph">Siteye Giriş Yaparak Diğer Ayrıcalıklara Erişin</p>
+            {% if messages %}
+                {% for message in messages %}
+                        {% if message.tags == "info" %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% else %}
+                            <div class="alert alert-dismissible text-center messagealerts" style="width: 50%;">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                {% endfor %}
+            {% endif %}
             <!-- Buraya mesaj gelecek -->
         </div>
     </div>

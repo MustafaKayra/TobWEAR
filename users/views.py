@@ -3,8 +3,12 @@ from .models import CustomUser
 from shop.models import Product, ProductCategory
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import login,authenticate,logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def loginuser(request):
+    if "next" in request.GET:
+        messages.warning(request, "Bu İşlemi Gerçekleştirebilmek İçin Önce Giriş Yapmalısınız")
     footerproducts = Product.objects.filter()[:5]
     footercategorys = ProductCategory.objects.filter()[:5]
 
@@ -45,6 +49,7 @@ def register(request):
     return render(request,"register.html",{"form":form, "footerproducts":footerproducts, "footercategorys":footercategorys})
 
 
+@login_required(login_url="/login/")
 def updateuser(request):
     if not request.user.is_authenticated:
         print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")

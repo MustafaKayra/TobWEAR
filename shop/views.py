@@ -151,10 +151,8 @@ def shoppingcart(request):
     return render(request,"shoppingcart.html",context)
 
 
+@login_required(login_url="/login/")
 def favorites(request):
-    if not request.user.is_authenticated:
-        print("Bu İşlemi Gerçekleştirebilmek İçin Önce Oturum Açmalısınız")
-        return HttpResponse(status=401)
     customer = request.user
     products = customer.favorites.all()
     categories = ProductCategory.objects.filter(product__in=products).distinct()

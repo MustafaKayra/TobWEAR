@@ -1899,4 +1899,7 @@ input[type="radio"]:checked + .productdetail-sizebutton { /* :checked */
     border-radius: 10px;
     box-shadow: 0 0 10px #124460;
     color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ilkanimasyon 1.5s forwards;
 }

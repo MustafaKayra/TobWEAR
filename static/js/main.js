@@ -54,6 +54,8 @@ const categoryName = document.querySelector(".products-title")
 const pageHeader = document.querySelector(".page-header")
 const message = sessionStorage.getItem("Message")
 
+const elements = document.body.querySelectorAll(".navbar, .container, .container-fluid, #collection-row, #whyme-row, #customers-section, .productdetail-description, .productdetail-anotherproducts")
+
 
 if (imageAnimation1 && imageAnimation2) {
     imageAnimation2.addEventListener("animationend", () => {
@@ -666,3 +668,21 @@ if (message) {
     pageHeader.appendChild(div)
     sessionStorage.removeItem("Message")
 }
+
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.transform = "translateY(20px)"
+            entry.target.style.opacity = "0"
+            entry.target.style.animation = "ilkanimasyon 1.5s forwards"
+            observer.unobserve(entry.target)
+        }
+    })
+}, {
+    threshold: 0.1
+})
+
+elements.forEach(element => {
+    observer.observe(element)
+})
