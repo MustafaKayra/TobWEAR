@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductColor, ProductFeatures, ProductImage, ProductSize, ProductCategory, OrderItem, ShoppingCard, OrderCard
+from .models import Product, ProductColor, ProductFeatures, ProductImage, ProductSize, ProductCategory, OrderItem, ShoppingCard, OrderCard, Contact
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -13,6 +13,7 @@ admin.site.register(ProductSize)
 admin.site.register(ProductCategory)
 admin.site.register(OrderItem)
 admin.site.register(ShoppingCard)
+admin.site.register(Contact)
 
 class OrderCardAdmin(admin.ModelAdmin):
     list_display = ("shoppingcard", "date", "complete")

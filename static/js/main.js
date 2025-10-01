@@ -54,7 +54,8 @@ const categoryName = document.querySelector(".products-title")
 const pageHeader = document.querySelector(".page-header")
 const message = sessionStorage.getItem("Message")
 
-const elements = document.body.querySelectorAll(".navbar, .container, .container-fluid, #collection-row, #whyme-row, #customers-section, .productdetail-description, .productdetail-anotherproducts")
+const elements = document.body.querySelectorAll(".navbar, .container, .container-fluid, #collection-row, #whyme-row, #customers-section, .productdetail-description, #anotherproducts")
+const nonelements = document.body.querySelectorAll(".card")
 
 
 if (imageAnimation1 && imageAnimation2) {
@@ -680,7 +681,7 @@ const observer = new IntersectionObserver(entries => {
         }
     })
 }, {
-    threshold: 0.1
+    threshold: 0.03
 })
 
 elements.forEach(element => {

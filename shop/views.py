@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSize, ShoppingCard, OrderCard
+from .models import Product, ProductCategory, OrderItem, ProductColor, ProductSize, ShoppingCard, OrderCard, Contact
 from users.models import CustomUser
 import json
 from django.core.exceptions import ValidationError
 import iyzipay
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def index(request):
@@ -14,6 +15,17 @@ def index(request):
     mostratedproducts3 = Product.objects.filter().order_by("price")[:3]
     footerproducts = Product.objects.filter()[:5]
     footercategorys = ProductCategory.objects.filter()[:5]
+
+    if request.method == "POST":
+        name = request.POST.get("name")
+        surname = request.POST.get("surname")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+        Contact.objects.create(name=name,surname=surname,email=email,subject=subject,message=message)
+        messages.success(request,"İletişim Formunuz Başarıyla İletildi, Geri Dönüş Email Adresinize Yapılacaktır")
+        return redirect('index')
+        
 
     context = {
         "mostratedproducts1": mostratedproducts1,
