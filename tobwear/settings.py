@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = "django-insecure-i51-suy(v(ki0-95-4_zhgl)x9qbe_5way)ce+dipr2-9mnt)$"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1").split(" ")
 
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'tobwear.wsgi.application'
 database_url = os.environ.get("DATABASE_URL")
 
 DATABASES = {
-    "default": dj_database_url.parse(database_url)
+    "default": dj_database_url.parse("postgresql://tobwear_postgresql_user:dNRRqRlIjxChbbVzFkeckqFLbFSzWY6y@dpg-d3gh01ggjchc739otdb0-a.oregon-postgres.render.com/tobwear_postgresql")
 }
 
 
@@ -131,7 +131,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "staticfiles" 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dllagrl4t',
